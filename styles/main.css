@@ -42,3 +42,9 @@ h1{
   background-size: contain;
   cursor: pointer;
 }
+.grid div.ship-end {
+  background-color: green;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
