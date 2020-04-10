@@ -26,51 +26,92 @@ function init(){
 
 
 
+  const carrier = {
+    length: 8,
+    location: [],
+    hit: []
+  }
+
+
+
+
+  function createCarrier (ship){
+
+    if (Math.round(Math.random()) > 0){
+      const shipRef = horizontalShip(ship.length)
+      for (let i = 0; i < ship.length; i++){
+        carrier.location.push(shipRef + i)
+      }
+    } else {
+      let shipRef = verticalShip(ship.length)
+      for (let i = 0; i < ship.length; i++){
+        ship.location.push(shipRef += 10)
+      }
+    }
+
+    console.log(carrier.location)
+
+    carrier.location.forEach(location => {
+      cells[location].classList.add('ship')
+    })
+  
+
+  }
+
+
+  
+  
+  createCarrier(carrier)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
   // * Computer ship placement
 
-  // Horizontal (value 0) or veritcal (value 1)
 
 
-
-  const boatLength = 4
 
   
-  function shipLocation(){
+  function shipRef(){
     return Math.round(Math.random()) ? horizontalShip() : verticalShip()
   }
 
-  function verticalShip (){
-    const verticalRef = Math.floor(Math.random() * (cellCount - (width * (boatLength - 1))))
-    cells[verticalRef].classList.add('ship')
-    cells[verticalRef + 10].classList.add('ship')
-    cells[verticalRef + 20].classList.add('ship')
-    cells[verticalRef + 30].classList.add('ship')
+  function verticalShip (a){
+    return Math.floor(Math.random() * (cellCount - (width * (a))))
+
   }
 
 
-  function horizontalShip(){
+  function horizontalShip(a){
     const allNums = []
     for (let i = 0 ; i < cellCount ; i++){
       allNums.push(i)
     }
     const newNums = allNums.filter(num => {
-      return num % width < (width - boatLength + 1)
+      return num % width < (width - a + 1)
     })
 
-    const horizontalRef = newNums[Math.floor(Math.random() * newNums.length)]
-    cells[horizontalRef].classList.add('ship')
-    cells[horizontalRef + 1].classList.add('ship')
-    cells[horizontalRef + 2].classList.add('ship')
-    cells[horizontalRef + 3].classList.add('ship')
+    return newNums[Math.floor(Math.random() * newNums.length)]
+
   }
   
 
 
 
-  shipLocation()
+  // fourShips()
 
 
 
