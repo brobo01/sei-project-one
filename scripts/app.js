@@ -24,6 +24,24 @@ function init(){
   
   createCells()
 
+
+  // ? DOM Elements
+  const playerGrid = document.querySelector('.player-grid')
+  const playerCells = []
+
+  
+  // ? Functions
+  function createPlayerCells() {
+    for (let i = 0; i < cellCount; i++){
+      const cell = document.createElement('div')
+      cell.textContent = i
+      playerGrid.appendChild(cell)
+      playerCells.push(cell)
+    }
+  }
+
+  createPlayerCells()
+
   
 
   const carrier = {
@@ -52,25 +70,11 @@ function init(){
     location: [],
     hit: []
   }
-
-
-
-  const allNums = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
-
-  const checkNums = [21,24,79]
-  let numberChecked = []
-
-  function numCheck (){ 
-    numberChecked = allNums.some(num => {
-      return checkNums.includes(num)
-    })
-  }
-
-  // numCheck()
-  // console.log(numberChecked)
-
-  // console.log(someAreNums)
+  const shipOptions = [carrier,battleship,destroyer,submarine,patrolboat]
   const allShipLocations = []
+
+
+  
 
 
 
@@ -78,7 +82,7 @@ function init(){
 
     return (Math.round(Math.random()) > 0) ? createHorizontalShip(ship) : createVerticalShip(ship)
       
-    
+
     function createHorizontalShip (ship){
       const shipRef = horizontalShip(ship.length)
       let tempShip = []
@@ -120,67 +124,17 @@ function init(){
       }
     }
   }
-  
-  // console.log(ship.location)
-
- 
-
-  // }
-  
-  // const allCompShips = carrier.location.concat(battleship.location,destroyer.location,submarine.location,patrolboat.location)
-
-  
-  
-  createShip(carrier)
-  // console.log(allCompShips)
-  // console.log(carrier.location)
-  console.log(allShipLocations)
-  
-  createShip(battleship)
-  // console.log(allCompShips)
-  // console.log(battleship.location)
-  console.log(allShipLocations)
-  
-  createShip(destroyer)
-  // console.log(allCompShips)
-  // console.log(destroyer.location)
-  console.log(allShipLocations)
-  
-  createShip(submarine)
-  // console.log(allCompShips)
-  // console.log(submarine.location)
-  console.log(allShipLocations)
-  
-  createShip(patrolboat)
-  // console.log(allCompShips)
-  // console.log(patrolboat.location)
-  console.log(allShipLocations)
-  
-
-  
-  
-  carrier.location.forEach(location => {
-    cells[location].classList.add('ship')
+  shipOptions.forEach(ship => {
+    createShip(ship)
   })
 
-  // carrier.location[0].classList.add('ship-end')
-  
-  battleship.location.forEach(location => {
-    cells[location].classList.add('ship')
+  shipOptions.forEach(ship => {
+    ship.location.forEach(location => {
+      cells[location].classList.add('ship')
+    })
   })
   
-  destroyer.location.forEach(location => {
-    cells[location].classList.add('ship')
-  })
-  
-  submarine.location.forEach(location => {
-    cells[location].classList.add('ship')
-  })
-  
-  patrolboat.location.forEach(location => {
-    cells[location].classList.add('ship')
-  })
-  
+
 
 
 
@@ -202,13 +156,6 @@ function init(){
   // * Computer ship placement
 
 
-
-
-  
-  function shipRef(){
-    return Math.round(Math.random()) ? horizontalShip() : verticalShip()
-  }
-
   function verticalShip (a){
     return Math.floor(Math.random() * (cellCount - (width * (a))))
 
@@ -223,15 +170,95 @@ function init(){
     const newNums = allNums.filter(num => {
       return num % width < (width - a + 1)
     })
-
     return newNums[Math.floor(Math.random() * newNums.length)]
-
   }
   
 
 
 
-  // fourShips()
+  // * Computer Shot Calcs
+  const shotBtn = document.querySelector('.shoot')
+  const fullCompShots = []
+  const compShotsTaken = []
+  let availableCompShots = []
+
+
+  function getFullShotList () {
+    for (let i = 0 ; i < cellCount ; i++){
+      fullCompShots.push(i)
+    }
+  }
+
+  function filterShots(){
+    availableCompShots = fullCompShots.filter(shot => !compShotsTaken.includes(shot))
+  }
+  
+  getFullShotList()
+  function computerShot (){
+    filterShots()
+    const shot = availableCompShots[Math.floor(Math.random() * availableCompShots.length)]
+    compShotsTaken.push(shot)
+    filterShots()
+
+
+
+
+
+    
+    if (playerCells[shot].classList.contains('ship')){
+      console.log('ship hit')
+      playerCells[shot].classList.add('hit')
+    } else {
+      playerCells[shot].classList.add('miss')
+      console.log('ship miss')
+    }
+  }
+
+  shotBtn.addEventListener('click',computerShot)
+
+
+  
+
+
+  // console.log(compShotsTaken)
+  // console.log(fullCompShots)
+
+  // console.log(availableCompShots)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  playerCells[27].classList.add('ship')
+  playerCells[37].classList.add('ship')
+  playerCells[47].classList.add('ship')
+  playerCells[57].classList.add('ship')
+  
+  
+  
+  
+  
+  
+  playerCells[33].classList.add('ship')
+  playerCells[34].classList.add('ship')
+  playerCells[35].classList.add('ship')
+  playerCells[32].classList.add('ship')
+
+
+
+  // if (playerCells[shot].classList.contains('ship')){
+  //   console.log('ship hit')
+  //   playerCells[shot].classList.add('hit')
+  // } else {
+  //   console.log('ship miss')
+  
+
+
+  
 
 
 

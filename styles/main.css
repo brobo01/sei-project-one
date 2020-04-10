@@ -10,6 +10,56 @@ h1{
   text-justify: center;
 }
 
+grids{
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+}
+
+.player-grid-wrapper {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+}
+
+.player-grid {
+  align-items: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  height: 400px;
+  width: 400px;
+}
+
+.player-grid div {
+  border: 1px solid lightgrey;
+  flex-grow: 1;
+  height: 10%;
+  width: 10%;
+}
+
+.player-grid div.ship {
+  background-color: darkgray;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+.player-grid div.hit {
+  background-color: red;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+.player-grid div.miss {
+  background-color: blue;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+
 .grid-wrapper {
   height: 90vh;
   display: flex;
@@ -23,8 +73,8 @@ h1{
   flex-wrap: wrap;
   height: 100%;
   justify-content: center;
-  height: 600px;
-  width: 600px;
+  height: 400px;
+  width: 400px;
 }
 
 .grid div {
