@@ -251,24 +251,42 @@ function init(){
   }
 
 
-  function hunter(){
-    if ((compResults[compResults.length - 1]) === 'hit'){
-      nextShot.push(compHits[0] - 1)
-    } if ((compResults[compResults.length - 2]) === 'hit'){
-      nextShot.push(compHits[0] - width)
+  const huntedShip = []
+  const huntedShipShots = []
+  
 
-    
+  function hunterOne(){
+    if (huntedShip.length === 1 && nextShot.length < 1){
+      nextShot.push(huntedShip[0] - 1)
+      nextShot.push(huntedShip[0] + 1)
+      nextShot.push(huntedShip[0] - 10)
+      nextShot.push(huntedShip[0] + 10)
     }
   }
 
+  function hunterTwo(){ 
+    if (huntedShip.length === 2 && nextShot.length < 1){
+      const direction = huntedShip[1] - huntedShip[0]
+      nextShot.push(huntedShip[1] + direction)
+      nextShot.push(huntedShip[1] + (direction * 2))
+      nextShot.push(huntedShip[1] + (direction * 3))
+    }
+  }
+
+  
 
 
 
   function chooseNextShot (){
-    if (compResults[compResults.length - 1 ] === 'hit' || compResults[compResults.length - 2 ] === 'hit'){
-      hunter()
-    } else {
-      nextShot.push(availableCompShots[Math.floor(Math.random() * availableCompShots.length)])
+    if (huntedShip.length === 1){
+      hunterOne()
+    } 
+    if (huntedShip.length === 2){
+      hunterTwo()
+    }
+    if (nextShot.length < 1) {
+      nextShot.push(33)
+      // nextShot.push(availableCompShots[Math.floor(Math.random() * availableCompShots.length)])
     }
   }
   
@@ -284,10 +302,12 @@ function init(){
     filterShots()
     chooseNextShot()
     const shot = nextShot[0]
+    nextShot.splice(0,1)
     console.log(shot)
     console.log(nextShot)
     console.log(compHits)
-    nextShot.pop()
+    
+    
     compShotsTaken.push(shot)
     filterShots()
     checkHit(shot)
@@ -295,6 +315,7 @@ function init(){
     if (playerCells[shot].classList.contains('ship')){
       console.log('ship hit')
       compHits.push(shot)
+      huntedShip.push(shot)
       compResults.push('hit')
       // playerCells[shot].classList.add('hit')
     } else {
@@ -306,11 +327,12 @@ function init(){
     
     
     
-    console.log(compShotsTaken[compShotsTaken.length - 1])
+    // console.log(compShotsTaken[compShotsTaken.length - 1])
     
-    
-    console.log(compHits)
-    console.log(compResults)
+    console.log(huntedShip)
+    // console.log(compHits)
+    // console.log(compResults)
+    // console.log(compResults.length)
   }
 
 
