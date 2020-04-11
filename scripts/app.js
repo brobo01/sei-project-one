@@ -129,9 +129,10 @@ function init(){
   })
 
   shipOptions.forEach(ship => {
-    ship.location.forEach(location => {
+    ship.location.forEach(location => { 
       cells[location].classList.add('ship')
     })
+    
   })
   
 
@@ -174,7 +175,7 @@ function init(){
   }
   
 
-
+  // ? SHOT TAKING CALCS---------------------------------------------
 
   // * Computer Shot Calcs
   const shotBtn = document.querySelector('.shoot')
@@ -185,9 +186,18 @@ function init(){
 
   function getFullShotList () {
     for (let i = 0 ; i < cellCount ; i++){
-      fullCompShots.push(i)
+      if ((((i - (i % width)) / width) % 2) === 0){
+        i % 2 === 0 ? fullCompShots.push(i) : ''
+      } else {
+        i % 2 === 0 ? '' : fullCompShots.push(i)
+
+      }
     }
   }
+
+  const i = 4
+
+  console.log((i - (i % width)) / width)
 
   function filterShots(){
     availableCompShots = fullCompShots.filter(shot => !compShotsTaken.includes(shot))
