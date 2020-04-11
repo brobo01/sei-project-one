@@ -219,6 +219,7 @@ function init(){
   const compShotsTaken = []
   let availableCompShots = []
   const compHits = []
+  const compResults = []
 
 
   function getFullShotList () {
@@ -250,15 +251,43 @@ function init(){
   }
 
 
+  function hunter(){
+    if ((compResults[compResults.length - 1]) === 'hit'){
+      nextShot.push(compHits[0] - 1)
+    } if ((compResults[compResults.length - 2]) === 'hit'){
+      nextShot.push(compHits[0] - width)
+
+    
+    }
+  }
 
 
 
+
+  function chooseNextShot (){
+    if (compResults[compResults.length - 1 ] === 'hit' || compResults[compResults.length - 2 ] === 'hit'){
+      hunter()
+    } else {
+      nextShot.push(availableCompShots[Math.floor(Math.random() * availableCompShots.length)])
+    }
+  }
+  
+
+
+
+
+  const nextShot = []
 
   getFullShotList()
 
   function computerShot (){
     filterShots()
-    const shot = availableCompShots[Math.floor(Math.random() * availableCompShots.length)]
+    chooseNextShot()
+    const shot = nextShot[0]
+    console.log(shot)
+    console.log(nextShot)
+    console.log(compHits)
+    nextShot.pop()
     compShotsTaken.push(shot)
     filterShots()
     checkHit(shot)
@@ -266,12 +295,14 @@ function init(){
     if (playerCells[shot].classList.contains('ship')){
       console.log('ship hit')
       compHits.push(shot)
+      compResults.push('hit')
       // playerCells[shot].classList.add('hit')
     } else {
       playerCells[shot].classList.add('miss')
+      compResults.push('miss')
       console.log('ship miss')
+      
     }
-    
     
     
     
@@ -279,6 +310,7 @@ function init(){
     
     
     console.log(compHits)
+    console.log(compResults)
   }
 
 
@@ -293,22 +325,7 @@ function init(){
   
   
   
-  
-  
-  
-  
-  
-  
 
-
-
-
-  // if (playerCells[shot].classList.contains('ship')){
-  //   console.log('ship hit')
-  //   playerCells[shot].classList.add('hit')
-  // } else {
-  //   console.log('ship miss')
-  // }
   
 
 
