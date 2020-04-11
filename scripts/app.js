@@ -44,36 +44,63 @@ function init(){
 
   
 
-  const carrier = {
+  const compCarrier = {
     length: 5,
     location: [],
     hit: []
   }
 
-  const battleship = {
+  const compBattleship = {
     length: 4,
     location: [],
     hit: []
   }
-  const destroyer = {
+  const compDestroyer = {
     length: 3,
     location: [],
     hit: []
   }
-  const submarine = {
+  const compSubmarine = {
     length: 3,
     location: [],
     hit: []
   }
-  const patrolboat = {
+  const compPatrolboat = {
     length: 2,
     location: [],
     hit: []
   }
-  const shipOptions = [carrier,battleship,destroyer,submarine,patrolboat]
+  const compShipOptions = [compCarrier,compBattleship,compDestroyer,compSubmarine,compPatrolboat]
   const allShipLocations = []
 
 
+  const playCarrier = {
+    length: 5,
+    location: [31,32,33,34,35],
+    hit: []
+  }
+
+  const playBattleship = {
+    length: 4,
+    location: [66,76,86,96],
+    hit: []
+  }
+  const playDestroyer = {
+    length: 3,
+    location: [11,12,13],
+    hit: []
+  }
+  const playSubmarine = {
+    length: 3,
+    location: [53,63,73],
+    hit: []
+  }
+  const playPatrolboat = {
+    length: 2,
+    location: [28,38],
+    hit: []
+  }
+  const playShipOptions = [playCarrier,playBattleship,playDestroyer,playSubmarine,playPatrolboat]
   
 
 
@@ -124,11 +151,11 @@ function init(){
       }
     }
   }
-  shipOptions.forEach(ship => {
+  compShipOptions.forEach(ship => {
     createShip(ship)
   })
 
-  shipOptions.forEach(ship => {
+  compShipOptions.forEach(ship => {
     ship.location.forEach(location => { 
       cells[location].classList.add('ship')
     })
@@ -137,10 +164,19 @@ function init(){
   
 
 
+  playShipOptions.forEach(ship => {
+    ship.location.forEach(location => { 
+      playerCells[location].classList.add('ship')
+    })
+  })
 
-
-
-
+  function playerHit (){
+    playShipOptions.forEach(ship => {
+      ship.hit.forEach(location => { 
+        playerCells[location].classList.add('hit')
+      })
+    })
+  }
 
 
 
@@ -182,47 +218,70 @@ function init(){
   const fullCompShots = []
   const compShotsTaken = []
   let availableCompShots = []
+  const compHits = []
 
 
   function getFullShotList () {
     for (let i = 0 ; i < cellCount ; i++){
+      // fullCompShots.push(i)
       if ((((i - (i % width)) / width) % 2) === 0){
         i % 2 === 0 ? fullCompShots.push(i) : ''
       } else {
         i % 2 === 0 ? '' : fullCompShots.push(i)
-
       }
     }
   }
 
-  const i = 4
-
-  console.log((i - (i % width)) / width)
 
   function filterShots(){
     availableCompShots = fullCompShots.filter(shot => !compShotsTaken.includes(shot))
   }
   
+
+
+  function checkHit(shot){
+    playShipOptions.forEach(ship => {
+      ship.location.forEach(location => {
+        if (shot === location){
+          ship.hit.push(shot)
+        }
+      })
+    })
+  }
+
+
+
+
+
+
   getFullShotList()
+
   function computerShot (){
     filterShots()
     const shot = availableCompShots[Math.floor(Math.random() * availableCompShots.length)]
     compShotsTaken.push(shot)
     filterShots()
-
-
-
-
-
-    
+    checkHit(shot)
+    playerHit()
     if (playerCells[shot].classList.contains('ship')){
       console.log('ship hit')
-      playerCells[shot].classList.add('hit')
+      compHits.push(shot)
+      // playerCells[shot].classList.add('hit')
     } else {
       playerCells[shot].classList.add('miss')
       console.log('ship miss')
     }
+    
+    
+    
+    
+    console.log(compShotsTaken[compShotsTaken.length - 1])
+    
+    
+    console.log(compHits)
   }
+
+
 
   shotBtn.addEventListener('click',computerShot)
 
@@ -230,10 +289,6 @@ function init(){
   
 
 
-  // console.log(compShotsTaken)
-  // console.log(fullCompShots)
-
-  // console.log(availableCompShots)
 
   
   
@@ -243,20 +298,8 @@ function init(){
   
   
   
-  playerCells[27].classList.add('ship')
-  playerCells[37].classList.add('ship')
-  playerCells[47].classList.add('ship')
-  playerCells[57].classList.add('ship')
   
-  
-  
-  
-  
-  
-  playerCells[33].classList.add('ship')
-  playerCells[34].classList.add('ship')
-  playerCells[35].classList.add('ship')
-  playerCells[32].classList.add('ship')
+
 
 
 
@@ -265,10 +308,35 @@ function init(){
   //   playerCells[shot].classList.add('hit')
   // } else {
   //   console.log('ship miss')
+  // }
   
 
 
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
