@@ -6,23 +6,23 @@ function init(){
 
   // ? DOM Elements
   const grid = document.querySelector('.grid')
-  const cells = []
+  const compCells = []
   
   // ? Grid Variables
   const width = 10
   const cellCount = width * width 
     
   // ? Functions
-  function createCells() {
+  function createCompCells() {
     for (let i = 0; i < cellCount; i++){
       const cell = document.createElement('div')
       cell.textContent = i
       grid.appendChild(cell)
-      cells.push(cell)
+      compCells.push(cell)
     }
   }
   
-  createCells()
+  createCompCells()
 
 
   // ? DOM Elements
@@ -77,6 +77,8 @@ function init(){
   }
   const compShipOptions = [compCarrier,compBattleship,compDestroyer,compSubmarine,compPatrolboat]
   const allShipLocations = []
+  const compSunkShips = []
+
 
 
   const playCarrier = {
@@ -116,7 +118,7 @@ function init(){
 
   }
   const playShipOptions = [playCarrier,playBattleship,playDestroyer,playSubmarine,playPatrolboat]
-  
+  const playSunkShips = []
 
 
 
@@ -172,7 +174,7 @@ function init(){
 
   compShipOptions.forEach(ship => {
     ship.location.forEach(location => { 
-      cells[location].classList.add('ship')
+      compCells[location].classList.add('ship')
     })
     
   })
@@ -228,7 +230,7 @@ function init(){
 
   // ? SHIP SUNK CALCS---------------------------------------------
 
-  function checkSunk(){
+  function checkPlaySunk(){
     playShipOptions.forEach(ship => {
       if (ship.location.length === ship.hit.length){
         ship.sunk = true
@@ -239,6 +241,29 @@ function init(){
     })
   }
 
+  function checkCompSunk(){
+    compShipOptions.forEach(ship => {
+      if (ship.location.length === ship.hit.length){
+        ship.sunk = true
+        ship.hit.forEach(location => {
+          compCells[location].classList.add('sunk')
+        })
+      }
+    })
+  }
+
+  // // ? GAME WIN CALCS---------------------------------------------
+
+  // function checkPlayWin(){
+  //   compShipOptions.forEach(ship => {
+  //     return ship.sunk === true ? alert('Player has won') : ''
+  //   })
+  // }
+
+
+  // function checkCompWin(){
+  //   return (playBattleship.sunk === true) ? alert('Computer has won') : ''
+  // }
 
 
   // ? SHOT TAKING CALCS---------------------------------------------
@@ -333,10 +358,10 @@ function init(){
     chooseNextShot()
     const shot = nextShot[0]
     nextShot.splice(0,1)
-    console.log(shot)
-    console.log(nextShot)
-    console.log(compHits)
-    
+    // console.log(shot)
+    // console.log(nextShot)
+    // console.log(compHits)
+    console.log(playSubmarine.sunk)
     
     compShotsTaken.push(shot)
     filterShots()
@@ -354,9 +379,11 @@ function init(){
       console.log('ship miss')
       
     }
-    checkSunk()
-    console.log(checkSunk())
-    
+    checkCompSunk()
+    checkPlaySunk()
+    // checkPlayWin()
+    // checkCompWin()
+
     // console.log(compShotsTaken[compShotsTaken.length - 1])
     
     // console.log(huntedShip)
@@ -372,10 +399,33 @@ function init(){
 
   
 
+  // ? PLAYER SHOT CALCS
+
+  // * Element
 
 
+
+
+  // * Function
+
+  function playerShot(){
+    const shot = event.target
+    console.log(shot)
+    if (event.target.classList.contains('ship')){
+      console.log('ship hit')
+
+    } else {
+      event.target.classList.add('miss')
+      console.log('ship miss')
+    }
+
+  }
+
+  // * Event
   
-  
+  compCells.forEach(cell => cell.addEventListener('click',playerShot))
+
+
   
 
   
