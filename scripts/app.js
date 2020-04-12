@@ -75,9 +75,9 @@ function init(){
     sunk: []
   }
   const compShipOptions = [compCarrier,compBattleship,compDestroyer,compSubmarine,compPatrolboat]
+  const compHitLocations = []
   const allShipLocations = []
-
-
+  
 
   const playCarrier = {
     length: 5,
@@ -115,6 +115,7 @@ function init(){
 
   }
   const playShipOptions = [playCarrier,playBattleship,playDestroyer,playSubmarine,playPatrolboat]
+  const playHitLocations = []
 
 
 
@@ -161,7 +162,6 @@ function init(){
 
   function verticalShip (a){
     return Math.floor(Math.random() * (cellCount - (width * (a))))
-
   }
   function horizontalShip(a){
     const allNums = []
@@ -173,29 +173,24 @@ function init(){
     })
     return newNums[Math.floor(Math.random() * newNums.length)]
   }
-  
-
   function createCompShips(){
     compShipOptions.forEach(ship => {
       createShip(ship)
     })
-  
-  
 
     // ? ADD SHIP FORMATTING TO BOTH COMP AND PLAYER SHIPS -----------------
     compShipOptions.forEach(ship => {
       ship.location.forEach(location => { 
         compCells[location].classList.add('ship')
       })
-    
     })
   }
+
   playShipOptions.forEach(ship => {
     ship.location.forEach(location => { 
       playerCells[location].classList.add('ship')
     })
   }) 
-  
   
   
   // ? ADD HIT FORMATTING TO BOTH COMP AND PLAYER SHIPS -----------------
@@ -244,18 +239,17 @@ function init(){
     })
   }
 
-  // // ? GAME WIN CALCS---------------------------------------------
+  // ? GAME WIN CALCS---------------------------------------------
 
-  // function checkPlayWin(){
-  //   compShipOptions.forEach(ship => {
-  //     return ship.sunk === true ? alert('Player has won') : ''
-  //   })
-  // }
+  function checkPlayWin(){
+    return compHitLocations.length === 17 ? alert('Player has won') : ''
+  }
+  
 
 
-  // function checkCompWin(){
-  //   return (playBattleship.sunk === true) ? alert('Computer has won') : ''
-  // }
+  function checkCompWin(){
+    return playHitLocations.length === 17 ? alert('Computer has won') : ''
+  }
 
 
   // ? SHOT TAKING CALCS---------------------------------------------
@@ -339,6 +333,7 @@ function init(){
       console.log('ship hit')
       compHits.push(shot)
       compResults.push('hit')
+      playHitLocations.push(shot)
       // playerCells[shot].classList.add('hit')
     } else {
       playerCells[shot].classList.add('miss')
@@ -348,6 +343,7 @@ function init(){
     }
 
     checkPlaySunk()
+    checkCompWin()
 
   }
 
@@ -360,11 +356,13 @@ function init(){
 
   // * Function
 
-  function playerShot(){
+  function playerShot(){ 
     const shot = parseInt(event.target.innerHTML)
     checkCompHit(shot)
     compHit()
+    console.log(compCells[shot])
     if (compCells[shot].classList.contains('ship')){
+      compHitLocations.push(shot)
       console.log('ship hit')
     } else {
       event.target.classList.add('miss')
@@ -372,12 +370,11 @@ function init(){
     }
     checkCompSunk()
     computerShot()
+    console.log(compHitLocations)
+    checkPlayWin()
   }
-  console
   
-  // * Event
-  
-  compCells.forEach(cell => cell.addEventListener('click',playerShot))
+    
 
   // ? GAME LOOP ----------------------------------------------------
 
@@ -387,15 +384,13 @@ function init(){
   // Make this disappear after it has been clicked
   function startGame (){
     createCompShips()
-    playerShot()
+    compCells.forEach(cell => cell.addEventListener('click',playerShot))
   }
   startBtn.addEventListener('click',startGame)
   
 
   
-  const powerBtn = document.querySelector('.power-btn')
   const startTimerBtn = document.querySelector('.start-timer-btn')
-  const stopTimerBtn = document.querySelector('.stop-timer-btn')
 
 
 
