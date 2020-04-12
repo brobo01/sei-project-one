@@ -50,7 +50,6 @@ function init(){
     hit: [],
     sunk: []
   }
-
   const compBattleship = {
     length: 4,
     location: [],
@@ -77,7 +76,6 @@ function init(){
   }
   const compShipOptions = [compCarrier,compBattleship,compDestroyer,compSubmarine,compPatrolboat]
   const allShipLocations = []
-  const compSunkShips = []
 
 
 
@@ -88,7 +86,6 @@ function init(){
     sunk: []
 
   }
-
   const playBattleship = {
     length: 4,
     location: [66,76,86,96],
@@ -118,15 +115,11 @@ function init(){
 
   }
   const playShipOptions = [playCarrier,playBattleship,playDestroyer,playSubmarine,playPatrolboat]
-  const playSunkShips = []
 
 
 
   function createShip (ship){
-
     return (Math.round(Math.random()) > 0) ? createHorizontalShip(ship) : createVerticalShip(ship)
-      
-
     function createHorizontalShip (ship){
       const shipRef = horizontalShip(ship.length)
       let tempShip = []
@@ -145,9 +138,6 @@ function init(){
         })
       }
     } 
-
-
-
     function createVerticalShip (ship) {
       let shipRef = verticalShip(ship.length)
       let tempShip = []
@@ -168,54 +158,11 @@ function init(){
       }
     }
   }
-  compShipOptions.forEach(ship => {
-    createShip(ship)
-  })
-
-  compShipOptions.forEach(ship => {
-    ship.location.forEach(location => { 
-      compCells[location].classList.add('ship')
-    })
-    
-  })
-  
-
-
-  playShipOptions.forEach(ship => {
-    ship.location.forEach(location => { 
-      playerCells[location].classList.add('ship')
-    })
-  })
-
-  function playerHit (){
-    playShipOptions.forEach(ship => {
-      ship.hit.forEach(location => { 
-        playerCells[location].classList.add('hit')
-      })
-    })
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // * Computer ship placement
-
 
   function verticalShip (a){
     return Math.floor(Math.random() * (cellCount - (width * (a))))
 
   }
-
-
   function horizontalShip(a){
     const allNums = []
     for (let i = 0 ; i < cellCount ; i++){
@@ -227,6 +174,42 @@ function init(){
     return newNums[Math.floor(Math.random() * newNums.length)]
   }
   
+  compShipOptions.forEach(ship => {
+    createShip(ship)
+  })
+  
+  // ? ADD SHIP FORMATTING TO BOTH COMP AND PLAYER SHIPS -----------------
+  compShipOptions.forEach(ship => {
+    ship.location.forEach(location => { 
+      compCells[location].classList.add('ship')
+    })
+    
+  })
+  playShipOptions.forEach(ship => {
+    ship.location.forEach(location => { 
+      playerCells[location].classList.add('ship')
+    })
+  }) 
+  
+  
+  
+  // ? ADD HIT FORMATTING TO BOTH COMP AND PLAYER SHIPS -----------------
+
+  function playerHit (){
+    playShipOptions.forEach(ship => {
+      ship.hit.forEach(location => { 
+        playerCells[location].classList.add('hit')
+      })
+    })
+  }
+
+  function compHit (){
+    compShipOptions.forEach(ship => {
+      ship.hit.forEach(location => { 
+        compCells[location].classList.add('hit')
+      })
+    })
+  }
 
   // ? SHIP SUNK CALCS---------------------------------------------
 
@@ -272,7 +255,6 @@ function init(){
   const shotBtn = document.querySelector('.shoot')
   const fullCompShots = []
   const compShotsTaken = []
-  let availableCompShots = []
   const compHits = []
   const compResults = []
 
@@ -305,41 +287,22 @@ function init(){
     })
   }
 
+  function checkCompHit(shot){
+    compShipOptions.forEach(ship => {
+      ship.location.forEach(location => {
+        if (location === shot){
+          ship.hit.push(shot)
+        }
+      })
+    })
+  }
 
-  // const huntedShip = []
-  // const huntedShipShots = []
-  
-
-  // function hunterOne(){
-  //   if (huntedShip.length === 1 && nextShot.length < 1){
-  //     nextShot.push(huntedShip[0] - 1)
-  //     nextShot.push(huntedShip[0] + 1)
-  //     nextShot.push(huntedShip[0] - 10)
-  //     nextShot.push(huntedShip[0] + 10)
-  //   }
-  // }
-
-  // function hunterTwo(){ 
-  //   if (huntedShip.length === 2 && nextShot.length < 1){
-  //     const direction = huntedShip[1] - huntedShip[0]
-  //     nextShot.push(huntedShip[1] + direction)
-  //     nextShot.push(huntedShip[1] + (direction * 2))
-  //     nextShot.push(huntedShip[1] + (direction * 3))
-  //   }
-  // }
 
   
 
 
 
   function chooseNextShot (){
-    // if (huntedShip.length === 1){
-    //   hunterOne()
-    // } 
-    // if (huntedShip.length === 2){
-    //   hunterTwo()
-    // }
-    // if (nextShot.length < 1) {
     nextShot.push('')
     // nextShot.push(availableCompShots[Math.floor(Math.random() * availableCompShots.length)])
   }
@@ -358,9 +321,6 @@ function init(){
     chooseNextShot()
     const shot = nextShot[0]
     nextShot.splice(0,1)
-    // console.log(shot)
-    // console.log(nextShot)
-    // console.log(compHits)
     console.log(playSubmarine.sunk)
     
     compShotsTaken.push(shot)
@@ -370,7 +330,6 @@ function init(){
     if (playerCells[shot].classList.contains('ship')){
       console.log('ship hit')
       compHits.push(shot)
-      // huntedShip.push(shot)
       compResults.push('hit')
       // playerCells[shot].classList.add('hit')
     } else {
@@ -381,46 +340,31 @@ function init(){
     }
     checkCompSunk()
     checkPlaySunk()
-    // checkPlayWin()
-    // checkCompWin()
 
-    // console.log(compShotsTaken[compShotsTaken.length - 1])
-    
-    // console.log(huntedShip)
-    // console.log(compHits)
-    // console.log(compResults)
-    // console.log(compResults.length)
   }
-
-
 
   shotBtn.addEventListener('click',computerShot)
 
 
   
 
-  // ? PLAYER SHOT CALCS
-
-  // * Element
-
-
-
+  // ? PLAYER SHOT ----------------------------------------------------
 
   // * Function
 
   function playerShot(){
-    const shot = event.target
-    console.log(shot)
-    if (event.target.classList.contains('ship')){
+    const shot = parseInt(event.target.innerHTML)
+    checkCompHit(shot)
+    compHit()
+    if (compCells[shot].classList.contains('ship')){
       console.log('ship hit')
-
     } else {
       event.target.classList.add('miss')
       console.log('ship miss')
     }
-
   }
-
+  console
+  
   // * Event
   
   compCells.forEach(cell => cell.addEventListener('click',playerShot))
