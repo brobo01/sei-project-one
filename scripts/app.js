@@ -226,10 +226,14 @@ function init(){
 
   function checkCompSunk(){
     compShipOptions.forEach(ship => {
+      console.log(ship.location.length)
       if (ship.location.length === ship.hit.length){
         ship.sunk = true
         ship.hit.forEach(location => {
+          console.log('help')
+          
           compCells[location].classList.add('sunk')
+          
         })
       }
     })
@@ -272,7 +276,7 @@ function init(){
 
 
   function filterShots(){
-    availableCompShots = fullCompShots.filter(shot => !compShotsTaken.includes(shot))
+    const availableCompShots = fullCompShots.filter(shot => !compShotsTaken.includes(shot))
   }
   
 
@@ -321,7 +325,6 @@ function init(){
     chooseNextShot()
     const shot = nextShot[0]
     nextShot.splice(0,1)
-    console.log(playSubmarine.sunk)
     
     compShotsTaken.push(shot)
     filterShots()
@@ -338,7 +341,7 @@ function init(){
       console.log('ship miss')
       
     }
-    checkCompSunk()
+
     checkPlaySunk()
 
   }
@@ -362,6 +365,7 @@ function init(){
       event.target.classList.add('miss')
       console.log('ship miss')
     }
+    checkCompSunk()
   }
   console
   

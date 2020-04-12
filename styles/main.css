@@ -106,15 +106,14 @@ justify-content: space-evenly;
   background-size: contain;
   cursor: pointer;
 }
-
-.grid div.miss {
-  background-color: pink;
+.grid div.sunk {
+  background-color: black;
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
-.grid div.ship-end {
-  background-color: green;
+.grid div.miss {
+  background-color: pink;
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
