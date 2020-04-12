@@ -59,6 +59,13 @@ justify-content: space-evenly;
   cursor: pointer;
 }
 
+.player-grid div.sunk {
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
 
 .grid-wrapper {
   height: 90vh;

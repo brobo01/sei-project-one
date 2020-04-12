@@ -47,28 +47,33 @@ function init(){
   const compCarrier = {
     length: 5,
     location: [],
-    hit: []
+    hit: [],
+    sunk: []
   }
 
   const compBattleship = {
     length: 4,
     location: [],
-    hit: []
+    hit: [],
+    sunk: []
   }
   const compDestroyer = {
     length: 3,
     location: [],
-    hit: []
+    hit: [],
+    sunk: []
   }
   const compSubmarine = {
     length: 3,
     location: [],
-    hit: []
+    hit: [],
+    sunk: []
   }
   const compPatrolboat = {
     length: 2,
     location: [],
-    hit: []
+    hit: [],
+    sunk: []
   }
   const compShipOptions = [compCarrier,compBattleship,compDestroyer,compSubmarine,compPatrolboat]
   const allShipLocations = []
@@ -77,28 +82,38 @@ function init(){
   const playCarrier = {
     length: 5,
     location: [31,32,33,34,35],
-    hit: []
+    hit: [],
+    sunk: []
+
   }
 
   const playBattleship = {
     length: 4,
     location: [66,76,86,96],
-    hit: []
+    hit: [],
+    sunk: []
+
   }
   const playDestroyer = {
     length: 3,
     location: [11,12,13],
-    hit: []
+    hit: [],
+    sunk: []
+
   }
   const playSubmarine = {
     length: 3,
     location: [53,63,73],
-    hit: []
+    hit: [],
+    sunk: []
+
   }
   const playPatrolboat = {
     length: 2,
     location: [28,38],
-    hit: []
+    hit: [],
+    sunk: []
+
   }
   const playShipOptions = [playCarrier,playBattleship,playDestroyer,playSubmarine,playPatrolboat]
   
@@ -211,6 +226,21 @@ function init(){
   }
   
 
+  // ? SHIP SUNK CALCS---------------------------------------------
+
+  function checkSunk(){
+    playShipOptions.forEach(ship => {
+      if (ship.location.length === ship.hit.length){
+        ship.sunk = true
+        ship.hit.forEach(location => {
+          playerCells[location].classList.add('sunk')
+        })
+      }
+    })
+  }
+
+
+
   // ? SHOT TAKING CALCS---------------------------------------------
 
   // * Computer Shot Calcs
@@ -251,50 +281,50 @@ function init(){
   }
 
 
-  const huntedShip = []
-  const huntedShipShots = []
+  // const huntedShip = []
+  // const huntedShipShots = []
   
 
-  function hunterOne(){
-    if (huntedShip.length === 1 && nextShot.length < 1){
-      nextShot.push(huntedShip[0] - 1)
-      nextShot.push(huntedShip[0] + 1)
-      nextShot.push(huntedShip[0] - 10)
-      nextShot.push(huntedShip[0] + 10)
-    }
-  }
+  // function hunterOne(){
+  //   if (huntedShip.length === 1 && nextShot.length < 1){
+  //     nextShot.push(huntedShip[0] - 1)
+  //     nextShot.push(huntedShip[0] + 1)
+  //     nextShot.push(huntedShip[0] - 10)
+  //     nextShot.push(huntedShip[0] + 10)
+  //   }
+  // }
 
-  function hunterTwo(){ 
-    if (huntedShip.length === 2 && nextShot.length < 1){
-      const direction = huntedShip[1] - huntedShip[0]
-      nextShot.push(huntedShip[1] + direction)
-      nextShot.push(huntedShip[1] + (direction * 2))
-      nextShot.push(huntedShip[1] + (direction * 3))
-    }
-  }
+  // function hunterTwo(){ 
+  //   if (huntedShip.length === 2 && nextShot.length < 1){
+  //     const direction = huntedShip[1] - huntedShip[0]
+  //     nextShot.push(huntedShip[1] + direction)
+  //     nextShot.push(huntedShip[1] + (direction * 2))
+  //     nextShot.push(huntedShip[1] + (direction * 3))
+  //   }
+  // }
 
   
 
 
 
   function chooseNextShot (){
-    if (huntedShip.length === 1){
-      hunterOne()
-    } 
-    if (huntedShip.length === 2){
-      hunterTwo()
-    }
-    if (nextShot.length < 1) {
-      nextShot.push(33)
-      // nextShot.push(availableCompShots[Math.floor(Math.random() * availableCompShots.length)])
-    }
+    // if (huntedShip.length === 1){
+    //   hunterOne()
+    // } 
+    // if (huntedShip.length === 2){
+    //   hunterTwo()
+    // }
+    // if (nextShot.length < 1) {
+    nextShot.push('')
+    // nextShot.push(availableCompShots[Math.floor(Math.random() * availableCompShots.length)])
   }
+  // }
   
 
 
 
 
-  const nextShot = []
+  const nextShot = [11,12,13,28,38,31,32,33,34,35,53,63,73,66,76,86,96]
 
   getFullShotList()
 
@@ -315,7 +345,7 @@ function init(){
     if (playerCells[shot].classList.contains('ship')){
       console.log('ship hit')
       compHits.push(shot)
-      huntedShip.push(shot)
+      // huntedShip.push(shot)
       compResults.push('hit')
       // playerCells[shot].classList.add('hit')
     } else {
@@ -324,12 +354,12 @@ function init(){
       console.log('ship miss')
       
     }
-    
-    
+    checkSunk()
+    console.log(checkSunk())
     
     // console.log(compShotsTaken[compShotsTaken.length - 1])
     
-    console.log(huntedShip)
+    // console.log(huntedShip)
     // console.log(compHits)
     // console.log(compResults)
     // console.log(compResults.length)
