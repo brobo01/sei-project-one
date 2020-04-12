@@ -174,17 +174,22 @@ function init(){
     return newNums[Math.floor(Math.random() * newNums.length)]
   }
   
-  compShipOptions.forEach(ship => {
-    createShip(ship)
-  })
-  
-  // ? ADD SHIP FORMATTING TO BOTH COMP AND PLAYER SHIPS -----------------
-  compShipOptions.forEach(ship => {
-    ship.location.forEach(location => { 
-      compCells[location].classList.add('ship')
+
+  function createCompShips(){
+    compShipOptions.forEach(ship => {
+      createShip(ship)
     })
+  
+  
+
+    // ? ADD SHIP FORMATTING TO BOTH COMP AND PLAYER SHIPS -----------------
+    compShipOptions.forEach(ship => {
+      ship.location.forEach(location => { 
+        compCells[location].classList.add('ship')
+      })
     
-  })
+    })
+  }
   playShipOptions.forEach(ship => {
     ship.location.forEach(location => { 
       playerCells[location].classList.add('ship')
@@ -366,6 +371,7 @@ function init(){
       console.log('ship miss')
     }
     checkCompSunk()
+    computerShot()
   }
   console
   
@@ -373,10 +379,26 @@ function init(){
   
   compCells.forEach(cell => cell.addEventListener('click',playerShot))
 
+  // ? GAME LOOP ----------------------------------------------------
 
+  const startBtn = document.querySelector('.start-btn')
+
+  
+  // Make this disappear after it has been clicked
+  function startGame (){
+    createCompShips()
+    playerShot()
+  }
+  startBtn.addEventListener('click',startGame)
   
 
   
+  const powerBtn = document.querySelector('.power-btn')
+
+
+
+
+ 
 
 
   
