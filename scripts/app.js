@@ -394,24 +394,36 @@ function init(){
 
   
   const powerBtn = document.querySelector('.power-btn')
+  const startTimerBtn = document.querySelector('.start-timer-btn')
+  const stopTimerBtn = document.querySelector('.stop-timer-btn')
 
 
 
 
- 
-
-
+  startTimerBtn.addEventListener('mousedown',start)
+  startTimerBtn.addEventListener('mouseup',stop)
   
+  let startTime = []
+  let endTime = []
+  let timeTaken = []
 
 
+  function start(){
+    startTime = new Date()
+  }
 
+  function stop(){
+    endTime = new Date()
+    timeTaken = endTime - startTime
+    console.log(timeTaken)
+    if (timeTaken > 1500 && timeTaken < 2500){
+      console.log('fuckin bring it on')
+    } else {
+      console.log('close')
+    }
+  }
 
-
-
-
-
-
-
+  console.log(timeTaken)
 
 
 
