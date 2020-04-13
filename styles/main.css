@@ -31,6 +31,7 @@ justify-content: space-evenly;
   justify-content: center;
   height: 400px;
   width: 400px;
+  background-color: darksalmon;
 }
 
 .player-grid div {
@@ -118,3 +119,10 @@ justify-content: space-evenly;
   background-size: contain;
   cursor: pointer;
 }
+
+
+
+
+
+
+

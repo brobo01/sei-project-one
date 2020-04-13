@@ -81,42 +81,51 @@ function init(){
 
   const playCarrier = {
     length: 5,
-    location: [],
+    location: [11,12,13,14,15],
     hit: [],
     sunk: []
 
   }
   const playBattleship = {
     length: 4,
-    location: [],
+    location: [42,52,62,72],
     hit: [],
     sunk: []
 
   }
   const playDestroyer = {
     length: 3,
-    location: [],
+    location: [85,86,87],
     hit: [],
     sunk: []
 
   }
   const playSubmarine = {
     length: 3,
-    location: [],
+    location: [47,27,37],
     hit: [],
     sunk: []
 
   }
   const playPatrolboat = {
     length: 2,
-    location: [],
+    location: [56,66],
     hit: [],
     sunk: []
 
   }
   const playShipOptions = [playCarrier,playBattleship,playDestroyer,playSubmarine,playPatrolboat]
   const playHitLocations = []
+  let allPlayShipLocations = []
 
+
+  function allPlayShipLocate (){
+    playShipOptions.forEach(ship => {
+      ship.location.forEach(location => {
+        allPlayShipLocations.push(location)
+      })
+    })
+  }
 
 
   function createShip (ship){
@@ -188,9 +197,9 @@ function init(){
 
 
   function createPlayShips(){
-    playShipOptions.forEach(ship => {
-      createShip(ship)
-    })
+    // playShipOptions.forEach(ship => {
+    //   createShip(ship)
+    // })
     formatPlayShips()
   }
   
@@ -401,6 +410,7 @@ function init(){
   function startGame (){
     createCompShips()
     createPlayShips()
+    allPlayShipLocate()
     compCells.forEach(cell => cell.addEventListener('click',playerShot))
   }
   startBtn.addEventListener('click',startGame)
@@ -440,36 +450,59 @@ function init(){
 
 
   // element
+  let shipToBeMoved = ''
+
+
+
+
   const moveRightBtn = document.querySelector('.move-right-btn')
 
 
-  function moveShipRight(){
-    console.log(playCarrier.location[playCarrier.location - 1])
+  function moveShipRight(){ 
+    const tempShip = shipToBeMoved.location.map(location => {
+      return location += 1
+    })
+    console.log(tempShip)
 
-    if (playCarrier.location[playCarrier.location - 1] % width < width - 1){
+    const tempPlayShipLocations = allPlayShipLocations.filter(location => {
+      return !shipToBeMoved.location.includes(location)
+    })
+
+    if (tempPlayShipLocations.some(num => {
+      return tempShip.includes(num)
+    })){
+      window.alert('there is s a ship there dumb dumb')
       
-      const tempShip = playCarrier.location.map(location => {
-        return location += 1
-      })
-
-
-    
-
-
-
-
-      removePlayShips()
-      playCarrier.location = []
-      tempShip.forEach(location => {
-        playCarrier.location.push(location)
-      })
-      formatPlayShips()
+    } else { 
+      if (shipToBeMoved.location[shipToBeMoved.location.length - 1] % width < width - 1){   
+        removePlayShips()
+        shipToBeMoved.location = []
+        tempShip.forEach(location => {
+          shipToBeMoved.location.push(location)
+        })
+        formatPlayShips()
+        allPlayShipLocations = []
+        allPlayShipLocate()
+      }
     }
   }
-
-
-
   moveRightBtn.addEventListener('click',moveShipRight)
+
+
+  // ? SHIP SELECT TO MOVE FUNCTIONS-----------------------------------------------------
+
+  const shipSelectBtns = document.querySelectorAll('.ship-selector')
+  
+  function shipSelected (){
+    shipToBeMoved = playShipOptions[event.target.value]
+  }
+  
+  shipSelectBtns.forEach(ship => {
+    ship.addEventListener('click',shipSelected)
+  })
+
+
+
 
 
 
