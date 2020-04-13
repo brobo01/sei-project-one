@@ -559,6 +559,52 @@ function init(){
   moveDownBtn.addEventListener('click',moveShipDown)
 
 
+
+  // ? ROTATE PLAYER SHIP DOWN FUNCTION-------------------------------------------
+
+  const rotateBtn = document.querySelector('#rotate-btn')
+
+  function rotateShip(){ 
+    let shipRef = shipToBeMoved.location[0]
+    const tempShip = []
+    if (shipToBeMoved.location[1] - shipToBeMoved.location[0] === 1){
+      
+      shipToBeMoved.location.forEach(() =>{
+        return tempShip.push((shipRef += 10) - 10)
+      })
+      console.log(shipToBeMoved.location)
+    } else {
+      shipToBeMoved.location.forEach(() =>{
+        return tempShip.push((shipRef += 1) - 1)
+      })
+      console.log('getting there')
+    }
+    
+  
+
+
+
+
+
+    
+    const tempPlayShipLocations = allPlayShipLocations.filter(location => {
+      return !shipToBeMoved.location.includes(location)
+    })
+    if (tempPlayShipLocations.some(num => {
+      return tempShip.includes(num)
+    
+    })){
+      window.alert('there is a ship there dumb dumb')
+    } else { 
+      if (shipToBeMoved.location[shipToBeMoved.location.length - 1] < cellCount - 1){   
+        approvedNewShipLocationProcess(tempShip)
+      }
+    }
+  }
+
+  rotateBtn.addEventListener('click',rotateShip)
+
+
   // ? CONFIRM LOCATIONS BUTTON-------------------------------------------
 
   const confirmBtn = document.querySelector('#confirm-btn')
