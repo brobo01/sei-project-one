@@ -453,40 +453,155 @@ function init(){
   let shipToBeMoved = ''
 
 
+  // ? MOVE PLAYER SHIP RIGHT FUNCTION--------------------------------------------
 
-
-  const moveRightBtn = document.querySelector('.move-right-btn')
-
+  const moveRightBtn = document.querySelector('#move-right-btn')
 
   function moveShipRight(){ 
     const tempShip = shipToBeMoved.location.map(location => {
       return location += 1
     })
-    console.log(tempShip)
-
     const tempPlayShipLocations = allPlayShipLocations.filter(location => {
       return !shipToBeMoved.location.includes(location)
     })
-
     if (tempPlayShipLocations.some(num => {
       return tempShip.includes(num)
     })){
       window.alert('there is s a ship there dumb dumb')
-      
     } else { 
       if (shipToBeMoved.location[shipToBeMoved.location.length - 1] % width < width - 1){   
-        removePlayShips()
-        shipToBeMoved.location = []
-        tempShip.forEach(location => {
-          shipToBeMoved.location.push(location)
-        })
-        formatPlayShips()
-        allPlayShipLocations = []
-        allPlayShipLocate()
+        approvedNewShipLocationProcess(tempShip)
       }
     }
   }
+
   moveRightBtn.addEventListener('click',moveShipRight)
+
+
+
+  // ? MOVE PLAYER SHIP LEFT FUNCTION-------------------------------------------
+
+  const moveLeftBtn = document.querySelector('#move-left-btn')
+
+  function moveShipLeft(){ 
+    const tempShip = shipToBeMoved.location.map(location => {
+      return location -= 1
+    })
+    const tempPlayShipLocations = allPlayShipLocations.filter(location => {
+      return !shipToBeMoved.location.includes(location)
+    })
+    if (tempPlayShipLocations.some(num => {
+      return tempShip.includes(num)
+      
+    })){
+      window.alert('there is s a ship there dumb dumb')
+    } else { 
+      if (shipToBeMoved.location[0] % width > 0){   
+        approvedNewShipLocationProcess(tempShip)
+      }
+    }
+  }
+
+  moveLeftBtn.addEventListener('click',moveShipLeft)
+
+
+  // ? MOVE PLAYER SHIP UP FUNCTION-------------------------------------------
+
+  const moveUpBtn = document.querySelector('#move-up-btn')
+
+  function moveShipUp(){ 
+    const tempShip = shipToBeMoved.location.map(location => {
+      return location -= width
+    })
+    const tempPlayShipLocations = allPlayShipLocations.filter(location => {
+      return !shipToBeMoved.location.includes(location)
+    })
+    if (tempPlayShipLocations.some(num => {
+      return tempShip.includes(num)
+      
+    })){
+      window.alert('there is a ship there dumb dumb')
+    } else { 
+      if (shipToBeMoved.location[0] > width){   
+        approvedNewShipLocationProcess(tempShip)
+      } 
+    }
+  }
+
+  moveUpBtn.addEventListener('click',moveShipUp)
+
+
+
+  // ? MOVE PLAYER SHIP DOWN FUNCTION-------------------------------------------
+
+  const moveDownBtn = document.querySelector('#move-down-btn')
+
+  function moveShipDown(){ 
+    console.log(shipToBeMoved)
+    const tempShip = shipToBeMoved.location.map(location => {
+      return location += width
+    })
+    const tempPlayShipLocations = allPlayShipLocations.filter(location => {
+      return !shipToBeMoved.location.includes(location)
+    })
+    if (tempPlayShipLocations.some(num => {
+      return tempShip.includes(num)
+    
+    })){
+      window.alert('there is a ship there dumb dumb')
+    } else { 
+      if (shipToBeMoved.location[shipToBeMoved.location.length - 1] < cellCount - 1){   
+        approvedNewShipLocationProcess(tempShip)
+      }
+    }
+  }
+
+  moveDownBtn.addEventListener('click',moveShipDown)
+
+
+  // ? CONFIRM LOCATIONS BUTTON-------------------------------------------
+
+  const confirmBtn = document.querySelector('#confirm-btn')
+
+  function confirmLocations(){ 
+    shipToBeMoved = ''
+  }
+
+  confirmBtn.addEventListener('click',confirmLocations)
+
+
+
+
+
+
+
+
+
+  // ? ADDITIONAL MOVE SHIP FUNCTION
+
+  function approvedNewShipLocationProcess(tempShip){
+    removePlayShips()
+    shipToBeMoved.location = []
+    tempShip.forEach(location => {
+      shipToBeMoved.location.push(location)
+    })
+    formatPlayShips()
+    allPlayShipLocations = []
+    allPlayShipLocate()
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   // ? SHIP SELECT TO MOVE FUNCTIONS-----------------------------------------------------
