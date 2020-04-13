@@ -81,35 +81,35 @@ function init(){
 
   const playCarrier = {
     length: 5,
-    location: [31,32,33,34,35],
+    location: [],
     hit: [],
     sunk: []
 
   }
   const playBattleship = {
     length: 4,
-    location: [66,76,86,96],
+    location: [],
     hit: [],
     sunk: []
 
   }
   const playDestroyer = {
     length: 3,
-    location: [11,12,13],
+    location: [],
     hit: [],
     sunk: []
 
   }
   const playSubmarine = {
     length: 3,
-    location: [53,63,73],
+    location: [],
     hit: [],
     sunk: []
 
   }
   const playPatrolboat = {
     length: 2,
-    location: [28,38],
+    location: [],
     hit: [],
     sunk: []
 
@@ -186,12 +186,28 @@ function init(){
     })
   }
 
-  playShipOptions.forEach(ship => {
-    ship.location.forEach(location => { 
-      playerCells[location].classList.add('ship')
+
+  function createPlayShips(){
+    playShipOptions.forEach(ship => {
+      createShip(ship)
     })
-  }) 
+    formatPlayShips()
+  }
   
+  function removePlayShips(){  
+    playShipOptions.forEach(ship => {
+      ship.location.forEach(location => { 
+        playerCells[location].classList.remove('ship')
+      })
+    })
+  }
+  function formatPlayShips (){
+    playShipOptions.forEach(ship => {
+      ship.location.forEach(location => { 
+        playerCells[location].classList.add('ship')
+      })
+    }) 
+  }
   
   // ? ADD HIT FORMATTING TO BOTH COMP AND PLAYER SHIPS -----------------
 
@@ -384,6 +400,7 @@ function init(){
   // Make this disappear after it has been clicked
   function startGame (){
     createCompShips()
+    createPlayShips()
     compCells.forEach(cell => cell.addEventListener('click',playerShot))
   }
   startBtn.addEventListener('click',startGame)
@@ -422,10 +439,37 @@ function init(){
 
 
 
+  // element
+  const moveRightBtn = document.querySelector('.move-right-btn')
+
+
+  function moveShipRight(){
+    console.log(playCarrier.location[playCarrier.location - 1])
+
+    if (playCarrier.location[playCarrier.location - 1] % width < width - 1){
+      
+      const tempShip = playCarrier.location.map(location => {
+        return location += 1
+      })
+
+
+    
 
 
 
 
+      removePlayShips()
+      playCarrier.location = []
+      tempShip.forEach(location => {
+        playCarrier.location.push(location)
+      })
+      formatPlayShips()
+    }
+  }
+
+
+
+  moveRightBtn.addEventListener('click',moveShipRight)
 
 
 
