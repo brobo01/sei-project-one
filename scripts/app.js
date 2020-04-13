@@ -550,7 +550,7 @@ function init(){
     })){
       window.alert('there is a ship there dumb dumb')
     } else { 
-      if (shipToBeMoved.location[shipToBeMoved.location.length - 1] < cellCount - 1){   
+      if (shipToBeMoved.location[shipToBeMoved.location.length - 1] < cellCount - width){   
         approvedNewShipLocationProcess(tempShip)
       }
     }
