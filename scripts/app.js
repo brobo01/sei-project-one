@@ -403,6 +403,12 @@ function init(){
   
   function hunterTwo(){
     nextShot = []
+
+    if (targetShip[1] % width === 0){
+      hunterRef.push(1)
+      hunterRevOne()
+    }
+
     const hunterTwoShot = []
     if (compResults[compResults.length - 1] === 'miss'){
       hunterRevOne()
@@ -422,6 +428,7 @@ function init(){
 
       if (playerCells[hunterTwoShot].classList.contains('miss')){
         hunterRevOne()
+
       } else {
         nextShot.push(parseInt(hunterTwoShot))
       }
@@ -429,8 +436,12 @@ function init(){
   }
 
   function hunterThree(){
-    const hunterThreeShot = []
     nextShot = []
+    if (targetShip[2] % width === 0){
+      hunterRevOne()
+    }
+
+    const hunterThreeShot = []
     if (compResults[compResults.length - 1] === 'miss'){
       hunterRevOne()
     }
@@ -446,6 +457,7 @@ function init(){
       console.log('damn')
     }
     if (playerCells[hunterThreeShot].classList.contains('miss')){
+      hunterRef.push(1)
       hunterRevOne()
     } else {
       nextShot.push(parseInt(hunterThreeShot))
@@ -454,19 +466,30 @@ function init(){
 
   function hunterFour(){
     nextShot = []
+    if (targetShip[3] % width === 0){
+      hunterRevOne()
+    }
+    const hunterFourShot = []
+
     if (compResults[compResults.length - 1] === 'miss'){
       hunterRevOne()
     }
     if (targetShip[1] - targetShip[0] === 1){
-      nextShot.push(targetShip[3] + (targetShip[1] - targetShip[0]))
+      hunterFourShot.push(targetShip[3] + (targetShip[1] - targetShip[0]))
     } if (targetShip[1] - targetShip[0] === -1){
-      nextShot.push(targetShip[3] + (targetShip[1] - targetShip[0]))
+      hunterFourShot.push(targetShip[3] + (targetShip[1] - targetShip[0]))
     } if (targetShip[1] - targetShip[0] === 10){
-      nextShot.push(targetShip[3] + (targetShip[1] - targetShip[0]))
+      hunterFourShot.push(targetShip[3] + (targetShip[1] - targetShip[0]))
     } if (targetShip[1] - targetShip[0] === -10){
-      nextShot.push(targetShip[3] - (targetShip[1] - targetShip[0]))    
+      hunterFourShot.push(targetShip[3] - (targetShip[1] - targetShip[0]))    
     } else {
       console.log('damn')
+    }
+    if (playerCells[hunterFourShot].classList.contains('miss')){
+      hunterRef.push(1)
+      hunterRevOne()
+    } else {
+      nextShot.push(parseInt(hunterFourShot))
     }
   }
 
@@ -511,6 +534,22 @@ function init(){
     }
 
   }
+  function hunterRevThree() {
+    console.log('hunterTwoThree')
+    nextShot = []
+    if (targetShip[1] - targetShip[0] === 1){
+      nextShot.push(targetShip[0] - (targetShip[1] - targetShip[0]) * 3)
+    } if (targetShip[1] - targetShip[0] === -1){
+      nextShot.push(targetShip[0] - (targetShip[1] - targetShip[0]) * 3)
+    } if (targetShip[1] - targetShip[0] === 10){
+      nextShot.push(targetShip[0] - (targetShip[1] - targetShip[0]) * 3)
+    } if (targetShip[1] - targetShip[0] === -10){
+      nextShot.push(targetShip[0] - (targetShip[1] - targetShip[0]) * 3)    
+    } else {
+      console.log('damn')
+    }
+
+  }
 
 
 
@@ -533,6 +572,8 @@ function init(){
       hunterFour()
     } if (hunterRef.length === 13){
       hunterRevTwo()
+    } if (hunterRef.length === 14){
+      hunterRevThree()
     } if (hunterRef.length === 0){
       console.log('whhhhy')
       nextShot.push(availableCompShots[Math.floor(Math.random() * availableCompShots.length)])
@@ -544,7 +585,7 @@ function init(){
   
   // ,12,13,14,15,27,37,47,56,66,42,52,62,72,85,86,32,33,34,87,10
   
-  let nextShot = [10,13]
+  let nextShot = [17]
 
   getFullShotList()
   
