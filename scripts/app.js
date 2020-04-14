@@ -80,6 +80,7 @@ function init(){
   
 
   const playCarrier = {
+    type: 'carrier',
     length: 5,
     location: [11,12,13,14,15],
     hit: [],
@@ -102,7 +103,7 @@ function init(){
   }
   const playSubmarine = {
     length: 3,
-    location: [47,27,37],
+    location: [27,37,47],
     hit: [],
     sunk: []
 
@@ -251,29 +252,58 @@ function init(){
 
   function checkCompSunk(){
     compShipOptions.forEach(ship => {
-      console.log(ship.location.length)
       if (ship.location.length === ship.hit.length){
-        ship.sunk = true
-        ship.hit.forEach(location => {
-          console.log('help')
-          
+        ship.hit.forEach(location => {          
           compCells[location].classList.add('sunk')
           
         })
+        ship.sunk = true
       }
     })
   }
 
   // ? GAME WIN CALCS---------------------------------------------
 
+  let compSunkShips = []
+
   function checkPlayWin(){
-    return compHitLocations.length === 17 ? alert('Player has won') : ''
+    compSunkShips = []
+    compShipOptions.forEach(ship => {
+      compSunkShips.push(ship.sunk)
+    })
+    if (compSunkShips.every(ship =>{
+      return ship === true
+    }
+    )){
+      console.log('You have won')
+    }
   }
   
 
+  let playSunkShips = []
 
   function checkCompWin(){
-    return playHitLocations.length === 17 ? alert('Computer has won') : ''
+    playSunkShips = []
+    playShipOptions.forEach(ship => {
+      playSunkShips.push(ship.sunk)
+    })
+    console.log(playSunkShips)
+    if (playSunkShips.every(ship =>{
+      return ship === true
+    }
+    )){
+      console.log(playSunkShips)
+      console.log('Computer has won')
+    }
+
+
+
+
+
+
+
+
+
   }
 
 
@@ -285,7 +315,7 @@ function init(){
   const compShotsTaken = []
   const compHits = []
   const compResults = []
-
+  let availableCompShots = []
 
   function getFullShotList () {
     for (let i = 0 ; i < cellCount ; i++){
@@ -299,8 +329,8 @@ function init(){
   }
 
 
-  function filterShots(){
-    const availableCompShots = fullCompShots.filter(shot => !compShotsTaken.includes(shot))
+  function filterCompShots(){
+    availableCompShots = fullCompShots.filter(shot => !compShotsTaken.includes(shot))
   }
   
 
@@ -326,32 +356,78 @@ function init(){
   }
 
 
+
+
+
+
+  function getShipType(shot){
+    playShipOptions.forEach(ship => {
+      if (ship.location.includes(shot)){
+        console.log(ship.type)
+      }
+    }
+    
+    )
+  }
+
+  const hunterRef = []
+  const targetShip = []
+
+
+  function hunterOne (){
+    hunterCheckSun()
+    console.log('hello')
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function hunterCheckSunk(){
+  
+  }
+
+
+
+
+
   
 
 
 
   function chooseNextShot (){
-    nextShot.push('')
-    // nextShot.push(availableCompShots[Math.floor(Math.random() * availableCompShots.length)])
+    if (hunterRef > 0){
+      hunterOne()
+
+    } else {
+      nextShot.push(availableCompShots[Math.floor(Math.random() * availableCompShots.length)])
+    }
   }
-  // }
   
 
 
 
-
-  const nextShot = [11,12,13,28,38,31,32,33,34,35,53,63,73,66,76,86,96]
+  const nextShot = [11,12,13,14,15,27,37,47,56,66,42,52,62,72,85,86,32,33,34,87,10]
 
   getFullShotList()
 
   function computerShot (){
-    filterShots()
+    filterCompShots()
     chooseNextShot()
     const shot = nextShot[0]
     nextShot.splice(0,1)
     
     compShotsTaken.push(shot)
-    filterShots()
+    filterCompShots()
     checkHit(shot)
     playerHit()
     if (playerCells[shot].classList.contains('ship')){
@@ -359,7 +435,9 @@ function init(){
       compHits.push(shot)
       compResults.push('hit')
       playHitLocations.push(shot)
-      // playerCells[shot].classList.add('hit')
+      getShipType(shot)
+      hunterRef.push(1)
+      targetShip.push(shot)
     } else {
       playerCells[shot].classList.add('miss')
       compResults.push('miss')
@@ -381,24 +459,31 @@ function init(){
 
   // * Function
 
+  const fullPlayShots = []
+
   function playerShot(){ 
-    const shot = parseInt(event.target.innerHTML)
-    checkCompHit(shot)
-    compHit()
-    console.log(compCells[shot])
-    if (compCells[shot].classList.contains('ship')){
-      compHitLocations.push(shot)
-      console.log('ship hit')
+    let shot = parseInt(event.target.innerHTML)
+    if (fullPlayShots.includes(shot)){
+      alert('captain, it may be the rum but we already fired there')
+      shot = []
     } else {
-      event.target.classList.add('miss')
-      console.log('ship miss')
+      checkCompHit(shot)
+      compHit()
+      console.log(compCells[shot])
+      if (compCells[shot].classList.contains('ship')){
+        compHitLocations.push(shot)
+        console.log('ship hit')
+      } else {
+        event.target.classList.add('miss')
+        console.log('ship miss')
+      }
+      checkCompSunk()
+      computerShot()
+      checkPlayWin()
+      fullPlayShots.push(shot)
+      console.log(fullPlayShots)
     }
-    checkCompSunk()
-    computerShot()
-    console.log(compHitLocations)
-    checkPlayWin()
   }
-  
     
 
   // ? GAME LOOP ----------------------------------------------------
@@ -416,7 +501,10 @@ function init(){
   startBtn.addEventListener('click',startGame)
   
 
-  
+  //* POWER BUTTON FUCTIONALITY---------------------------------
+
+
+    
   const startTimerBtn = document.querySelector('.start-timer-btn')
 
 
@@ -449,7 +537,7 @@ function init(){
 
 
 
-  // element
+  //* PLAYER SHIP MOVEMENT FUNCTION BEFORE BATTLE---------------------------------
   let shipToBeMoved = ''
 
 
@@ -522,7 +610,7 @@ function init(){
     })){
       window.alert('there is a ship there dumb dumb')
     } else { 
-      if (shipToBeMoved.location[0] > width){   
+      if (shipToBeMoved.location[0] > width - 1){   
         approvedNewShipLocationProcess(tempShip)
       } 
     }
@@ -566,38 +654,44 @@ function init(){
 
   function rotateShip(){ 
     let shipRef = shipToBeMoved.location[0]
-    const tempShip = []
+    let tempShip = []
     if (shipToBeMoved.location[1] - shipToBeMoved.location[0] === 1){
-      
       shipToBeMoved.location.forEach(() =>{
         return tempShip.push((shipRef += 10) - 10)
       })
-      console.log(shipToBeMoved.location)
+
+      const tempPlayShipLocations = allPlayShipLocations.filter(location => {
+        return !shipToBeMoved.location.includes(location)
+      })
+      if (tempPlayShipLocations.some(num => {
+        return tempShip.includes(num)
+      })){
+        window.alert('there is a ship there dumb dumb')
+      } else { 
+        if (tempShip[tempShip.length - 1] < cellCount - 1) {   
+          approvedNewShipLocationProcess(tempShip)
+          tempShip = []
+        }
+      }
+
+
     } else {
       shipToBeMoved.location.forEach(() =>{
         return tempShip.push((shipRef += 1) - 1)
       })
-      console.log('getting there')
-    }
     
-  
-
-
-
-
-
-    
-    const tempPlayShipLocations = allPlayShipLocations.filter(location => {
-      return !shipToBeMoved.location.includes(location)
-    })
-    if (tempPlayShipLocations.some(num => {
-      return tempShip.includes(num)
-    
-    })){
-      window.alert('there is a ship there dumb dumb')
-    } else { 
-      if (shipToBeMoved.location[shipToBeMoved.location.length - 1] < cellCount - 1){   
-        approvedNewShipLocationProcess(tempShip)
+      const tempPlayShipLocations = allPlayShipLocations.filter(location => {
+        return !shipToBeMoved.location.includes(location)
+      })
+      if (tempPlayShipLocations.some(num => {
+        return tempShip.includes(num)
+      })){
+        window.alert('there is a ship there dumb dumb')
+      } else { 
+        if (tempShip[0] % width < width - 2){   
+          approvedNewShipLocationProcess(tempShip)
+          tempShip = []
+        }
       }
     }
   }
@@ -611,16 +705,14 @@ function init(){
 
   function confirmLocations(){ 
     shipToBeMoved = ''
+    playShipOptions.forEach(ship => 
+      ship.location.forEach(location =>
+        console.log((location)  
+        )
+      ))
   }
 
   confirmBtn.addEventListener('click',confirmLocations)
-
-
-
-
-
-
-
 
 
   // ? ADDITIONAL MOVE SHIP FUNCTION
@@ -661,15 +753,6 @@ function init(){
   shipSelectBtns.forEach(ship => {
     ship.addEventListener('click',shipSelected)
   })
-
-
-
-
-
-
-
-
-
 
 
 
