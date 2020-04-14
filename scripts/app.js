@@ -403,41 +403,53 @@ function init(){
   
   function hunterTwo(){
     nextShot = []
+    const hunterTwoShot = []
     if (compResults[compResults.length - 1] === 'miss'){
       hunterRevOne()
     }
     if (targetShip[1] - targetShip[0] === 1){
-      nextShot.push(targetShip[1] + (targetShip[1] - targetShip[0]))
+      hunterTwoShot.push(targetShip[1] + (targetShip[1] - targetShip[0]))
     } if (targetShip[1] - targetShip[0] === -1){
-      nextShot.push(targetShip[1] + (targetShip[1] - targetShip[0]))
+      hunterTwoShot.push(targetShip[1] + (targetShip[1] - targetShip[0]))
     } if (targetShip[1] - targetShip[0] === 10){
-      nextShot.push(targetShip[1] + (targetShip[1] - targetShip[0]))
+      hunterTwoShot.push(targetShip[1] + (targetShip[1] - targetShip[0]))
     } if (targetShip[1] - targetShip[0] === -10){
-      console.log('getting there')
-      nextShot.push(targetShip[1] + (targetShip[1] - targetShip[0]))        
+      hunterTwoShot.push(targetShip[1] + (targetShip[1] - targetShip[0]))        
     } else {
       console.log('damn')
     }
+    if (hunterTwoShot )
 
+      if (playerCells[hunterTwoShot].classList.contains('miss')){
+        hunterRevOne()
+      } else {
+        nextShot.push(parseInt(hunterTwoShot))
+      }
+    
   }
 
   function hunterThree(){
+    const hunterThreeShot = []
     nextShot = []
     if (compResults[compResults.length - 1] === 'miss'){
       hunterRevOne()
     }
     if (targetShip[1] - targetShip[0] === 1){
-      nextShot.push(targetShip[2] + (targetShip[1] - targetShip[0]))
+      hunterThreeShot.push(targetShip[2] + (targetShip[1] - targetShip[0]))
     } if (targetShip[1] - targetShip[0] === -1){
-      nextShot.push(targetShip[2] + (targetShip[1] - targetShip[0]))
+      hunterThreeShot.push(targetShip[2] + (targetShip[1] - targetShip[0]))
     } if (targetShip[1] - targetShip[0] === 10){
-      nextShot.push(targetShip[2] + (targetShip[1] - targetShip[0]))
+      hunterThreeShot.push(targetShip[2] + (targetShip[1] - targetShip[0]))
     } if (targetShip[1] - targetShip[0] === -10){
-      nextShot.push(targetShip[2] + (targetShip[1] - targetShip[0]))    
+      hunterThreeShot.push(targetShip[2] + (targetShip[1] - targetShip[0]))    
     } else {
       console.log('damn')
     }
-
+    if (playerCells[hunterThreeShot].classList.contains('miss')){
+      hunterRevOne()
+    } else {
+      nextShot.push(parseInt(hunterThreeShot))
+    }
   }
 
   function hunterFour(){
@@ -465,18 +477,21 @@ function init(){
 
   function hunterRevOne() {
     console.log('hunterOneRev')
+    const hunterRevOneShot = []
     nextShot = []
     if (targetShip[1] - targetShip[0] === 1){
-      nextShot.push(targetShip[0] - (targetShip[1] - targetShip[0]))
+      hunterRevOneShot.push(targetShip[0] - (targetShip[1] - targetShip[0]))
     } if (targetShip[1] - targetShip[0] === -1){
-      nextShot.push(targetShip[0] - (targetShip[1] - targetShip[0]))
+      hunterRevOneShot.push(targetShip[0] - (targetShip[1] - targetShip[0]))
     } if (targetShip[1] - targetShip[0] === 10){
-      nextShot.push(targetShip[0] - (targetShip[1] - targetShip[0]))
+      hunterRevOneShot.push(targetShip[0] - (targetShip[1] - targetShip[0]))
     } if (targetShip[1] - targetShip[0] === -10){
-      nextShot.push(targetShip[0] - (targetShip[1] - targetShip[0]))    
+      hunterRevOneShot.push(targetShip[0] - (targetShip[1] - targetShip[0]))    
     } else {
       console.log('damn')
     }
+    nextShot.push(parseInt(hunterRevOneShot))
+    console.log(hunterRevOneShot)
     hunterRef.push(1,1,1,1,1,1,1,1,1)
   }
 
@@ -497,18 +512,6 @@ function init(){
 
   }
 
-
-
-
-
-  // function hunterCheckSunk(){
-  //   if (targetShip[0].classList.contains('sunk')){
-  //     console.log('got him')
-  //     // hunterRef = []
-  //     // chooseNextShot()
-  //   }
-  // }
-  
 
 
 
@@ -541,13 +544,17 @@ function init(){
   
   // ,12,13,14,15,27,37,47,56,66,42,52,62,72,85,86,32,33,34,87,10
   
-  let nextShot = [15]
+  let nextShot = [10,13]
 
   getFullShotList()
   
   function computerShot (){
     console.log(nextShot)
     filterCompShots()
+    if (compShotsTaken.includes(nextShot[0])){
+      nextShot.splice(0,1)
+    }
+    console.log(compShotsTaken)
     const shot = nextShot[0]
     nextShot.splice(0,1)
     console.log(hunterRef)
