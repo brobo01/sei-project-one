@@ -84,7 +84,7 @@ function init(){
     length: 5,
     location: [11,12,13,14,15],
     hit: [],
-    sunk: []
+    sunk: false
 
   }
   const playBattleship = {
@@ -246,7 +246,6 @@ function init(){
         ship.hit.forEach(location => {
           playerCells[location].classList.add('sunk')
         })
-        // nextShot = []
       }
     })
   }
@@ -371,11 +370,12 @@ function init(){
     )
   }
 
-  const hunterRef = []
-  const targetShip = []
+  let hunterRef = []
+  let targetShip = []
 
 
   function hunterOne (){
+    
     if (targetShip[0] < width - 1){
       nextShot.push(targetShip[0] - 1)
       nextShot.push(targetShip[0] + width)
@@ -502,10 +502,10 @@ function init(){
 
 
   // function hunterCheckSunk(){
-  //   if (targetShip[0].sunk){
+  //   if (targetShip[0].classList.contains('sunk')){
   //     console.log('got him')
-  //     hunterRef = []
-  //     chooseNextShot()
+  //     // hunterRef = []
+  //     // chooseNextShot()
   //   }
   // }
   
@@ -541,7 +541,7 @@ function init(){
   
   // ,12,13,14,15,27,37,47,56,66,42,52,62,72,85,86,32,33,34,87,10
   
-  let nextShot = [26]
+  let nextShot = [15]
 
   getFullShotList()
   
@@ -559,21 +559,26 @@ function init(){
       compHits.push(shot)
       compResults.push('hit')
       playHitLocations.push(shot)
-      getShipType(shot)
+      // getShipType(shot)
       hunterRef.push(1)
       targetShip.push(shot)
+      nextShot = []
     } else {
       playerCells[shot].classList.add('miss')
       compResults.push('miss')
       console.log('ship miss')
-      
     }
-    
+    getShipType(shot)
     chooseNextShot()
     filterCompShots()
     checkPlaySunk()
     checkCompWin()
-
+    if (playerCells[shot].classList.contains('sunk')){
+      hunterRef = []
+      nextShot.push(availableCompShots[Math.floor(Math.random() * availableCompShots.length)])
+      targetShip = []
+    }
+    
   }
 
   shotBtn.addEventListener('click',computerShot)
@@ -597,10 +602,10 @@ function init(){
       compHit()
       if (compCells[shot].classList.contains('ship')){
         compHitLocations.push(shot)
-        console.log('ship hit')
+        // console.log('ship hit')
       } else {
         event.target.classList.add('miss')
-        console.log('ship miss')
+        // console.log('ship miss')
       }
       checkCompSunk()
       computerShot()
