@@ -14,9 +14,10 @@
     </style>
   </head>
   <body>
-    <h1>Pirate Ships of the Caribbean</h1>
+    <h1>Pirateships of the Caribbean</h1>
     
       <gamebuttons>
+      <button class='start-btn'>start game</button>
       <button class='ship-selector' value=0 >Carrier</button>
       <button class='ship-selector' value=1 >Battleship</button>
       <button class='ship-selector' value=2 >Destroyer</button>
@@ -33,10 +34,13 @@
     </gamebuttons>
       
 
-<intro>
+<intro id="intro">
+  <intro-contents>
     <a id="jack-sparrow-cover" href="#"></a>
-  <p>As the movie franchise has come to an end, it's time for me to take a well earned rest. There's only one thing to do, train my successor to captain The Black Pearl. Now Captain, what do I call you?</p>
-  <button class='start-btn'>start game</button>
+    <p>As the movie franchise came to an end, it's time for me to take a well earned rest. There's only one thing to do, train my successor to captain The Black Pearl. Now Captain, what do I call you?</p>
+    <input type="text" id="name-input" placeholder="Your name please">
+    <input type="submit" value="Let's go Captain" id="name-submit">
+  </intro-contents>  
 </intro>      
       <grids>
       <div class="player-grid-wrapper">

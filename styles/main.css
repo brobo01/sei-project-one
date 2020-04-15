@@ -15,28 +15,66 @@ body {
 h1{
   text-justify: center;
   text-align: center;
+  font-size: 35px;
 }
 
 intro{
-  display: flex;
-  width: 500px;
-  height: 500px;
-  background-color: white;
+  display: none;
+  flex-direction: column;
+  align-items: left;
+  min-height: 500px;
+  background-color: rgba(145, 141, 132, 0.5);
   background-image: url(../assets/NicePng_jack-swagger-png_7676125.png);
   background-size: cover;
   width: 75%;
   text-align: left;
 }
 
+intro-contents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  padding: 25px;
+}
+
 p{
-width: 50%;
-padding: 25px;
+  background-color: rgba(238, 166, 11, 0.5);
+  font-size: 25px;
+  color: brown;
+  padding: 25px;
+}
+
+#name-input{
+  height: 55px;
+  font-size: 30px;
+  letter-spacing: 4px;
+  text-justify: center;
+}
+
+#name-submit{
+  font-family: "piratefont";
+  margin-top: 25px;
+  height: 55px;
+  font-size: 20px;
+  letter-spacing: 4px;
+  text-justify: center;
+  background-color: red;
+  color: white;
+  border: none
+}
+
+button{
+  height: 40px;
+  width: 75px;
 }
 
 grids{
-display: none;
+display: flex;
 flex-direction: row;
 justify-content: space-evenly;
+align-items: center;
+width: 75%;
 }
 
 gamebuttons{

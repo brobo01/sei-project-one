@@ -571,15 +571,6 @@ function init(){
 
   }
 
-
-
-
-
-
-  
-
-
-
   function chooseNextShot (){
     console.log(hunterRef)
     if (hunterRef.length === 1){
@@ -975,6 +966,35 @@ function init(){
   shipSelectBtns.forEach(ship => {
     ship.addEventListener('click',shipSelected)
   })
+
+
+
+  // ? DIV APPEAR AND DISAPPEAR ----------------------------------------------------
+
+  const introScreen = document.getElementById('#intro')
+  const nameSubmit = document.getElementById('#name-submit')
+  console.log(introScreen)
+  console.log(nameSubmit)
+
+  function introDisappear() {
+    console.log('hello')
+    if (introScreen.style.display === 'none') {
+      introScreen.style.display = 'block'
+    } else {
+      introScreen.style.display = 'none'
+    }
+  }
+
+  nameSubmit.addEventListener('click',introDisappear)
+
+
+
+
+
+
+
+
+
 
 
 
