@@ -708,9 +708,9 @@ function init(){
 
   //* POWER BUTTON FUCTIONALITY---------------------------------
 
-  function shotModifier(tempShot){
-    return tempShot + 1
-  }
+  // function shotModifier(tempShot){
+  //   return tempShot + 1
+  // }
 
 
 
@@ -718,35 +718,35 @@ function init(){
 
 
     
-  const startTimerBtn = document.querySelector('.start-timer-btn')
+  // const startTimerBtn = document.querySelector('.start-timer-btn')
 
 
 
 
-  startTimerBtn.addEventListener('mousedown',start)
-  startTimerBtn.addEventListener('mouseup',stop)
+  // startTimerBtn.addEventListener('mousedown',start)
+  // startTimerBtn.addEventListener('mouseup',stop)
   
-  let startTime = []
-  let endTime = []
-  let timeTaken = []
+  // let startTime = []
+  // let endTime = []
+  // let timeTaken = []
 
 
-  function start(){
-    startTime = new Date()
-  }
+  // function start(){
+  //   startTime = new Date()
+  // }
 
-  function stop(){
-    endTime = new Date()
-    timeTaken = endTime - startTime
-    console.log(timeTaken)
-    if (timeTaken > 1500 && timeTaken < 2500){
-      console.log('fuckin bring it on')
-    } else {
-      console.log('close')
-    }
-  }
+  // function stop(){
+  //   endTime = new Date()
+  //   timeTaken = endTime - startTime
+  //   console.log(timeTaken)
+  //   if (timeTaken > 1500 && timeTaken < 2500){
+  //     console.log('fuckin bring it on')
+  //   } else {
+  //     console.log('close')
+  //   }
+  // }
 
-  console.log(timeTaken)
+  // console.log(timeTaken)
 
 
 
@@ -969,33 +969,45 @@ function init(){
 
 
 
-  // ? DIV APPEAR AND DISAPPEAR ----------------------------------------------------
+  // ?  INTRO DISAPPEAR AND BRING UP SHIP LOCATOR---------------------------------------------------
 
-  const introScreen = document.getElementById('#intro')
-  const nameSubmit = document.getElementById('#name-submit')
-  console.log(introScreen)
-  console.log(nameSubmit)
+  const nameSubmit = document.getElementById('name-submit')
+  const introScreen = document.getElementById('intro')
+  const secondScreen = document.getElementById('grids')
+  const gameButtons = document.getElementById('game-buttons')
+  const instructions = document.getElementById('instructions-div')
+  const barbossa = document.getElementById('barbossa')
+
+
 
   function introDisappear() {
-    console.log('hello')
-    if (introScreen.style.display === 'none') {
-      introScreen.style.display = 'block'
-    } else {
-      introScreen.style.display = 'none'
-    }
+    introScreen.style.display = 'none'
+    secondScreen.style.display = 'flex'
+    gameButtons.style.display = 'flex'
+    instructions.style.display = 'flex'
+    // barbossa.style.display = 'flex'
+
   }
 
   nameSubmit.addEventListener('click',introDisappear)
 
 
+  // ? SHIP LOCATOR DISAPPEAR ----------------------------------------------------
+
+  const confirmShips = document.getElementById('confirm-btn')
+  const compGrid = document.getElementsByClassName('grid-wrapper')
+
+  function toWar(){
+    gameButtons.style.display = 'none'
+    instructions.style.display = 'none'  
+    compGrid.style.display = 'flex'
+    // barbossa.style.display = 'none'
+
+  }
 
 
 
-
-
-
-
-
+  confirmShips.addEventListener('click',toWar)
 
 
 

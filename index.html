@@ -16,39 +16,66 @@
   <body>
     <h1>Pirateships of the Caribbean</h1>
     
-      <gamebuttons>
-      <button class='start-btn'>start game</button>
-      <button class='ship-selector' value=0 >Carrier</button>
-      <button class='ship-selector' value=1 >Battleship</button>
-      <button class='ship-selector' value=2 >Destroyer</button>
-      <button class='ship-selector' value=3 >Submarine</button>
-      <button class='ship-selector' value=4 >Patrol Boat</button>
-      
-      <button class='ship-move-btn' id='move-right-btn'>Move right</button>
-      <button class='ship-move-btn' id='move-left-btn'>Move left</button>
-      <button class='ship-move-btn' id='move-up-btn'>Move up</button>
-      <button class='ship-move-btn' id='move-down-btn'>Move down</button>
-      <button class='ship-move-btn' id='rotate-btn'>Rotate</button>
-      <button class='ship-move-btn' id='confirm-btn'>Confirm Locations</button>
-      <button class='start-timer-btn'>Power Button</button>
-    </gamebuttons>
+
       
 
-<intro id="intro">
-  <intro-contents>
-    <a id="jack-sparrow-cover" href="#"></a>
-    <p>As the movie franchise came to an end, it's time for me to take a well earned rest. There's only one thing to do, train my successor to captain The Black Pearl. Now Captain, what do I call you?</p>
-    <input type="text" id="name-input" placeholder="Your name please">
-    <input type="submit" value="Let's go Captain" id="name-submit">
-  </intro-contents>  
-</intro>      
-      <grids>
-      <div class="player-grid-wrapper">
-        <div class="player-grid"></div>
-      </div>  
-      <div class="grid-wrapper">
-        <div class="grid"></div>
-      </div>
-         </grids>
+    <intro id="intro">
+      <intro-contents>
+        <a id="jack-sparrow-cover" href="#"></a>
+        <p>As the movie franchise came to an end, it's time for me to take a well earned rest. There's only one thing to do, train my successor to captain The Black Pearl. Now Captain, what do I call you?</p>
+        <input type="text" id="name-input" placeholder="Your name please">
+        <input type="submit" id="name-submit" value="Let's go Captain">
+      </intro-contents>  
+    </intro>  
+<main>
+
+  <instructions id='instructions-div'>
+    <p id='instructions'>
+      Right Captain, you have 5 ships in your command, click place ships below to get them on the battlefield. Then use your guile and cunning to move them around the high sea so that bilge rat Barbossa can't hit them. When you're satisfied, click 'To War' and prime your cannons for an almighty battle!
+    </p>
+    <sub-instructions>
+      <a id='jack-headshot'></a>
+      <button class='start-btn' id='start-btn'>Place Ships!</button>
+    </sub-instructions>
+  </instructions> 
+  
+  <grids id="grids">
+    <div class="player-grid-wrapper">
+      <div class="player-grid"></div>
+    </div>  
+    <div class="grid-wrapper">
+      <div class="grid"></div>
+    </div>
+  </grids>     
+  <barbossa id='barbossa'>
+    help
+  </barbossa> 
+</main>
+
+    <gamebuttons id="game-buttons">
+      <ship-selector>
+        <button class='ship-selector' value=0 >Carrier</button>
+        <button class='ship-selector' value=1 >Battleship</button>
+        <button class='ship-selector' value=2 >Destroyer</button>
+        <button class='ship-selector' value=3 >Submarine</button>
+        <button class='ship-selector' value=4 >Patrol Boat</button>
+      </ship-selector>
+      <movement-buttons>
+        <direction-buttons>
+          <button class='ship-move-btn' id='move-up-btn'>North</button>
+          <central-buttons>
+            <button class='ship-move-btn' id='move-left-btn'>West</button>
+            <img src="assets/pngkey.com-compass-rose-png-322989.png" id="compass" style="width: 125px; height: 125px;">
+            <button class='ship-move-btn' id='move-right-btn'>East</button>
+          </central-buttons>
+          <button class='ship-move-btn' id='move-down-btn'>South</button>
+        </direction-buttons>
+        <confirm-btn>
+          <button class='ship-move-btn' id='rotate-btn'>Rotate</button>
+          <button class='confirm-btn' id='confirm-btn'>To war!</button>
+        </confirm-btn>
+        <!-- <button class='start-timer-btn'>Power Button</button> -->
+      </movement-buttons>
+    </gamebuttons>
       </body>
 </html>

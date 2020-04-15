@@ -1,6 +1,8 @@
 * {
   box-sizing: border-box;
   font-family: "piratefont";
+  margin: 0;
+
 }
 
 body {
@@ -11,6 +13,7 @@ body {
   margin: 0;
   background-image: url(../assets/pirate-background.jpg);
   background-size: cover;
+  margin: 0;
 }
 h1{
   text-justify: center;
@@ -18,8 +21,16 @@ h1{
   font-size: 35px;
 }
 
+main{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  /* background-color: blue; */
+}
+
 intro{
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: left;
   min-height: 500px;
@@ -69,20 +80,157 @@ button{
   width: 75px;
 }
 
+instructions{
+  display: none;
+  flex-direction: column;
+  width: 350px;
+  height: 90%%;
+  /* background-color: green; */
+}
+
+sub-instructions{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height:100%;
+  background-color: rgba(238, 166, 11, 0.5);
+
+}
+
+
+#instructions{
+  font-size: 20px;
+  color: black;
+}
+
+#jack-headshot{
+  height:70%;
+  width: 50%;
+  background-image: url(../assets/Jack-headshot.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.start-btn{
+  background-color: red;
+  color: white;
+  font-size: 25px;
+  width: auto;
+  border: none;
+}
+
+barbossa{
+  display:none;
+  width: 350px;
+  height: 100%;
+  /* background-color: green; */
+}
+
+
 grids{
-display: flex;
+display: none;
 flex-direction: row;
-justify-content: space-evenly;
+justify-content: center;
 align-items: center;
-width: 75%;
+color: none;
+font-size: 0px;
+width: auto;
 }
 
 gamebuttons{
   display: none;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  background-image: url(../assets/abstract-ancient-antique-art-235985.jpg);
+  width: 750px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 25px;
 }
 
+ship-selector{
+/* flex-wrap: wrap; */
+  flex-direction: column;
+justify-content: center;
+align-content: space-around;
+  /* background-color: blue; */
+  width: 50%;
+  }
+
+  .ship-selector{
+    background-color: rgba(0, 0, 0, 0.0);
+    font-size: 25px;
+    width: 250px;
+    border: none;
+    color: black;
+  }
+
+
+.ship-move-btn{
+  background-color: rgba(0, 0, 0, 0.0);
+  font-size: 25px;
+  border: none;
+  color: black;
+}
+
+movement-buttons{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+background-size: contain;
+background-repeat: no-repeat;
+flex-direction: row;
+}
+
+direction-buttons{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width:250px;
+}
+
+central-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+
+  background-size: 25%;
+  width: 100%;
+  height: 50%;
+}
+
+#compass{
+  display:flex;
+}
+
+confirm-btn{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+justify-content: center;
+  height: 100%;
+  width: 250px;
+}
+#confirm-btn{
+  background-color: red;
+  color: white;
+  width: 150px;
+  border: none;
+  font-size: 25px;
+}
+
+
+
 .player-grid-wrapper {
-  height: 90vh;
+  height: 440px;
   display: flex;
   justify-content: center;
 }
@@ -96,7 +244,9 @@ gamebuttons{
   justify-content: center;
   height: 400px;
   width: 400px;
-background-image: url(../assets/Blue-sea.-View-from-above-18796.jpg);}
+background-image: url(../assets/Blue-sea.-View-from-above-18796.jpg);
+margin: 0px 20px;
+}
 
 .player-grid div {
   border: 1px solid lightgrey;
@@ -141,15 +291,15 @@ background-image: url(../assets/Blue-sea.-View-from-above-18796.jpg);}
 
 
 .grid-wrapper {
-  height: 90vh;
+  height: 440px;
   display: flex;
   justify-content: center;
 }
 
 .grid {
+  display: flex;
   align-items: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
-  display: flex;
   flex-wrap: wrap;
   height: 100%;
   justify-content: center;
@@ -157,7 +307,7 @@ background-image: url(../assets/Blue-sea.-View-from-above-18796.jpg);}
   width: 400px;
   background-image: url(../assets/abstract-ancient-antique-art-235985.jpg);
   background-size: cover;
-
+  margin: 0px 20px;
 }
 
 .grid div {
