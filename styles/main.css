@@ -47,6 +47,15 @@ justify-content: space-evenly;
   background-size: contain;
   cursor: pointer;
 }
+
+.player-grid div.tempshot {
+  background-color: red;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+
 .player-grid div.hit {
   background-color: red;
   background-repeat: no-repeat;
