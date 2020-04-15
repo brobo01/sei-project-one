@@ -90,7 +90,7 @@ function init(){
   const playBattleship = {
     type: 'battleship',
     length: 4,
-    location: [42,52,62,72],
+    location: [32,42,52,62],
     hit: [],
     sunk: []
 
@@ -367,13 +367,15 @@ function init(){
   function getShipType(shot){
     playShipOptions.forEach(ship => {
       if (ship.location.includes(shot)){
-        console.log(ship.type)
+        playHitShips.push(ship.type)
+
       }
     }
     
     )
   }
 
+  const playHitShips = []
   let hunterRef = []
   let targetShip = []
 
@@ -603,12 +605,13 @@ function init(){
   
   // ,12,13,14,15,27,37,47,56,66,42,52,62,72,85,86,32,33,34,87,10
   
-  let nextShot = [98]
+  let nextShot = [11]
 
   getFullShotList()
   
   function computerShot (){
     console.log(nextShot)
+    
     filterCompShots()
     if (compShotsTaken.includes(nextShot[0])){
       nextShot.splice(0,1)
@@ -631,7 +634,14 @@ function init(){
       // getShipType(shot)
       hunterRef.push(1)
       targetShip.push(shot)
+      // if (playHitShips[1] === playHitShips[0]){
+      //   console.log('same same')
       nextShot = []
+      // } else {
+      //   console.log('but different')
+      //   nextShot.splice(0,1)
+
+      // } 
     } else {
       playerCells[shot].classList.add('miss')
       compResults.push('miss')
@@ -642,6 +652,11 @@ function init(){
     filterCompShots()
     checkPlaySunk()
     checkCompWin()
+
+
+
+
+
     if (playerCells[shot].classList.contains('sunk')){
       hunterRef = []
       nextShot.push(availableCompShots[Math.floor(Math.random() * availableCompShots.length)])
@@ -651,7 +666,6 @@ function init(){
     
   }
 
-  shotBtn.addEventListener('click',computerShot)
 
 
   

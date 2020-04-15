@@ -5,11 +5,18 @@
     <title>BATTLESHIPS</title>
     <link rel="stylesheet" href="styles/main.css">
     <script src="scripts/app.js" charset="utf-8"></script>
+    <style>
+      @font-face {
+    font-family: 'piratefont';
+    src: url('fonts/pieces of Eight.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;}
+    </style>
   </head>
   <body>
-    <h1>Battleships</h1>
-      <button class='shoot'>computer shot</button>
-      <button class='start-btn'>start game</button>
+    <h1>Pirate Ships of the Caribbean</h1>
+    
+      <gamebuttons>
       <button class='ship-selector' value=0 >Carrier</button>
       <button class='ship-selector' value=1 >Battleship</button>
       <button class='ship-selector' value=2 >Destroyer</button>
@@ -22,10 +29,15 @@
       <button class='ship-move-btn' id='move-down-btn'>Move down</button>
       <button class='ship-move-btn' id='rotate-btn'>Rotate</button>
       <button class='ship-move-btn' id='confirm-btn'>Confirm Locations</button>
-      
       <button class='start-timer-btn'>Power Button</button>
-
+    </gamebuttons>
       
+
+<intro>
+    <a id="jack-sparrow-cover" href="#"></a>
+  <p>As the movie franchise has come to an end, it's time for me to take a well earned rest. There's only one thing to do, train my successor to captain The Black Pearl. Now Captain, what do I call you?</p>
+  <button class='start-btn'>start game</button>
+</intro>      
       <grids>
       <div class="player-grid-wrapper">
         <div class="player-grid"></div>

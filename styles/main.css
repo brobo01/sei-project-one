@@ -1,19 +1,46 @@
 * {
   box-sizing: border-box;
+  font-family: "piratefont";
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 100vh;
   margin: 0;
+  background-image: url(../assets/pirate-background.jpg);
+  background-size: cover;
 }
 h1{
   text-justify: center;
+  text-align: center;
+}
+
+intro{
+  display: flex;
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  background-image: url(../assets/NicePng_jack-swagger-png_7676125.png);
+  background-size: cover;
+  width: 75%;
+  text-align: left;
+}
+
+p{
+width: 50%;
+padding: 25px;
 }
 
 grids{
-display: flex;
+display: none;
 flex-direction: row;
 justify-content: space-evenly;
+}
+
+gamebuttons{
+  display: none;
 }
 
 .player-grid-wrapper {
@@ -31,8 +58,7 @@ justify-content: space-evenly;
   justify-content: center;
   height: 400px;
   width: 400px;
-  background-color: darksalmon;
-}
+background-image: url(../assets/Blue-sea.-View-from-above-18796.jpg);}
 
 .player-grid div {
   border: 1px solid lightgrey;
@@ -54,7 +80,6 @@ justify-content: space-evenly;
   background-size: contain;
   cursor: pointer;
 }
-
 
 .player-grid div.hit {
   background-color: red;
@@ -92,6 +117,9 @@ justify-content: space-evenly;
   justify-content: center;
   height: 400px;
   width: 400px;
+  background-image: url(../assets/abstract-ancient-antique-art-235985.jpg);
+  background-size: cover;
+
 }
 
 .grid div {
