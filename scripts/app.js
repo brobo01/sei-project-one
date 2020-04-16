@@ -670,6 +670,7 @@ function init(){
   function playerShot(){ 
     let shot = parseInt(event.target.innerHTML)
     if (fullPlayShots.includes(shot)){
+      alreadyShot()
       alert('Captain, it may be the rum but we already fired there. Have another try')
       shot = []
     } else {
@@ -997,6 +998,7 @@ function init(){
 
   const confirmShips = document.getElementById('confirm-btn')
   const compGrid = document.getElementById('comp-grid')
+  const tauntBox = document.getElementById('taunts')
 
   function toWar(){
     gameButtons.style.display = 'none'
@@ -1004,12 +1006,27 @@ function init(){
     compGrid.style.display = 'flex'
     barbossa.style.display = 'none'
     main.style.justifyContent = 'center'
+    tauntBox.style.display = 'flex'
 
+  }
+  confirmShips.addEventListener('click',toWar)
+
+  // ? TAUNTS BOX ----------------------------------------------------
+
+  const tauntsBox = document.getElementById('taunt-text')
+
+  function alreadyShot(){
+    tauntsBox.innerHTML = 'captain, we already shot there'
   }
 
 
 
-  confirmShips.addEventListener('click',toWar)
+
+
+
+
+
+
 
 
 

@@ -14,6 +14,7 @@ body {
   background-image: url(../assets/pirate-background.jpg);
   background-size: cover;
   margin: 0;
+
 }
 header{
   display: flex;
@@ -28,6 +29,7 @@ header{
   width: 500px;
   min-height: 90px;
   margin: 5px 0px;
+  text-shadow: 2px 2px #d18585;
 }
 #center-text{
   font-size: 20px;
@@ -50,7 +52,9 @@ intro{
   flex-direction: column;
   align-items: left;
   min-height: 500px;
-  background-color: rgba(145, 141, 132, 0.5);
+  /* background-color: rgba(145, 141, 132, 0.5); */
+  background: radial-gradient(circle, rgba(230,201,16,1) 0%, rgba(140,104,9,0.7525385154061625) 85%);
+
   background-image: url(../assets/NicePng_jack-swagger-png_7676125.png);
   background-size: cover;
   width: 55%;
@@ -68,10 +72,16 @@ intro-contents {
 }
 
 p{
-  background-color: rgba(238, 166, 11, 0.5);
+  /* background-color: rgba(238, 166, 11, 0.5); */
+
   font-size: 25px;
   color: brown;
   padding: 25px;
+}
+
+#intro-text{
+  background: radial-gradient(circle, rgba(230,201,16,1) 0%, rgba(140,104,9,0.7525385154061625) 85%);
+
 }
 
 #name-input{
@@ -90,6 +100,9 @@ p{
   text-justify: center;
   background: radial-gradient(circle, rgba(230,16,16,1) 0%, rgba(140,25,9,1) 85%);
   color: white;
+  text-shadow: 2px 2px #493232;
+  box-shadow: 0px 0px 10px #888888;
+
   border: none
 }
 
@@ -105,6 +118,8 @@ instructions{
   flex-direction: column;
   width: 350px;
   height: 90%;
+  background: radial-gradient(circle, rgba(230,201,16,1) 0%, rgba(140,104,9,0.7525385154061625) 85%);
+
   /* background-color: green; */
 }
 
@@ -114,7 +129,8 @@ sub-instructions{
   align-items: center;
   justify-content: space-around;
   height:100%;
-  background-color: rgba(238, 166, 11, 0.5);
+  background-color: none;
+  /* background-color: rgba(238, 166, 11, 0.5); */
 
 }
 
@@ -131,15 +147,17 @@ sub-instructions{
   background-repeat: no-repeat;
   background-size: cover;
 }
-
-.start-btn{
+  
+  .start-btn{
 
   background: radial-gradient(circle, rgba(230,16,16,1) 0%, rgba(140,25,9,1) 85%);
-
+  text-shadow: 2px 2px #493232;
   color: white;
   font-size: 25px;
-  width: auto;
+  width: 100px;
+  height: 75px;
   border: none;
+  box-shadow: 0px 0px 10px #888888;
 }
 
 barbossa{
@@ -246,6 +264,7 @@ justify-content: center;
 #confirm-btn{
   background: radial-gradient(circle, rgba(230,16,16,1) 0%, rgba(140,25,9,1) 85%);
   color: white;
+  text-shadow: 2px 2px #493232;
   width: 150px;
   border: none;
   font-size: 25px;
@@ -337,7 +356,7 @@ background-image: url(../assets/UIHere.png);
 }
 
 .grid div {
-  border: 1px solid lightgrey;
+  border: 1px solid darkgrey;
   flex-grow: 1;
   height: 10%;
   width: 10%;
@@ -373,14 +392,50 @@ background-image: url(../assets/UIHere.png);
 }
 
 taunts{
+  display:none;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
   width: 75%;
-  height: 200px;
-  background-color: brown;
+  height: 150px;
+  background-color: rgba(255,255,255,0.4);
+  border: blue
 }
 
+jack-sparrow-head{
+height: 80%;
+background-image: url(../assets/Jack-headshot.png);
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+width: 25%;
+}
 
+barbossa-head{
+  height: 80%;
+  background-image: url(../assets/Captain_Barbossa_headshot.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 25%;
+  }
 
-
-
+taunt-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 50%;
+}
+taunt-text{
+  background-color: black;
+  color:white;
+  height: auto;
+  text-align: center;
+  font-size: 25px;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 7px;
+}
 
 
