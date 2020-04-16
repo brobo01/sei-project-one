@@ -47,18 +47,18 @@
       <div class="grid"></div>
     </div>
   </grids>     
-  <barbossa id='barbossa'>
+  <!-- <barbossa id='barbossa'>
     help
-  </barbossa> 
+  </barbossa>  -->
 </main>
 
     <gamebuttons id="game-buttons">
       <ship-selector>
-        <button class='ship-selector' value=0 >Carrier</button>
-        <button class='ship-selector' value=1 >Battleship</button>
-        <button class='ship-selector' value=2 >Destroyer</button>
-        <button class='ship-selector' value=3 >Submarine</button>
-        <button class='ship-selector' value=4 >Patrol Boat</button>
+        <button class='ship-selector' value=0 >Galleon</button>
+        <button class='ship-selector' value=1 >Black Pearl</button>
+        <button class='ship-selector' value=2 >Flying Dutchman</button>
+        <button class='ship-selector' value=3 >HMS Interceptor</button>
+        <button class='ship-selector' value=4 >Rowing Boat</button>
       </ship-selector>
       <movement-buttons>
         <direction-buttons>
@@ -81,15 +81,27 @@
     <taunts id="taunts">
       <jack-sparrow-head></jack-sparrow-head>
       <taunt-box id="taunt-box">
-        <taunt-text id="taunt-text">
-           
-        </taunt-text>
+        <taunt-text id="taunt-text"></taunt-text>
       </taunt-box>
       <barbossa-head></barbossa-head>
 
 
     </taunts>
+    
+<player-won id="player-won">          
+  <h2>You won!</h2>
+  <iframe width="700" height="375" src="https://www.youtube.com/embed/xZ0BSN9-dhg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <button class='reset-button'>You're hired! Fancy another go before we celebrate?</button>
+</player-won>
+
+<player-lost id ="player-lost">
+  <h2>You lost!</h2>
+  <iframe width="700" height="375" src="https://www.youtube.com/embed/mnXQdMRi63E?" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyrosc ope; picture-in-picture" allowfullscreen></iframe>
+  <button class='reset-button'>Try again Captain, maybe less rum next time!</button>
+</player-lost>
 
 
-      </body>
+  
+
+</body>
 </html>

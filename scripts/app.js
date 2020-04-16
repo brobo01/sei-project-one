@@ -280,6 +280,7 @@ function init(){
       return ship === true
     }
     )){
+      playerWon()
       console.log('You have won')
     }
   }
@@ -297,6 +298,7 @@ function init(){
     }
     )){
       console.log(playSunkShips)
+      playerLost()
       console.log('Computer has won')
     }
 
@@ -324,11 +326,11 @@ function init(){
   function getFullShotList () {
     for (let i = 0 ; i < cellCount ; i++){
       fullCompShots.push(i)
-      // if ((((i - (i % width)) / width) % 2) === 0){
-      //   i % 2 === 0 ? fullCompShots.push(i) : ''
-      // } else {
-      //   i % 2 === 0 ? '' : fullCompShots.push(i)
-      // }
+      if ((((i - (i % width)) / width) % 2) === 0){
+        i % 2 === 0 ? fullCompShots.push(i) : ''
+      } else {
+        i % 2 === 0 ? '' : fullCompShots.push(i)
+      }
     }
   }
   
@@ -610,6 +612,10 @@ function init(){
     if (nextShot[0] < 0 || nextShot[0] === 100){
       nextShot.splice(0,1)
     }
+    if (nextShot.length === 0){
+      console.log('close shave')
+      chooseNextShot()
+    }
     console.log(compShotsTaken)
     const shot = nextShot[0]
     nextShot.splice(0,1)
@@ -628,6 +634,8 @@ function init(){
       // if (playHitShips[1] === playHitShips[0]){
       //   console.log('same same')
       nextShot = []
+      compHitPlayer()
+
       // } else {
       //   console.log('but different')
       //   nextShot.splice(0,1)
@@ -637,6 +645,7 @@ function init(){
       playerCells[shot].classList.add('miss')
       compResults.push('miss')
       console.log('ship miss')
+      // compMissPlayer()
     }
     getShipType(shot)
     chooseNextShot()
@@ -671,7 +680,6 @@ function init(){
     let shot = parseInt(event.target.innerHTML)
     if (fullPlayShots.includes(shot)){
       alreadyShot()
-      alert('Captain, it may be the rum but we already fired there. Have another try')
       shot = []
     } else {
 
@@ -679,9 +687,11 @@ function init(){
       compHit()
       if (compCells[shot].classList.contains('ship')){
         compHitLocations.push(shot)
+        playerHitComp()
       // console.log('ship hit')
       } else {
         event.target.classList.add('miss')
+        // playerMiss()
       // console.log('ship miss')
       }
       checkCompSunk()
@@ -705,6 +715,15 @@ function init(){
     compCells.forEach(cell => cell.addEventListener('click',playerShot))
   }
   startBtn.addEventListener('click',startGame)
+
+  // ? RESET FUNCTION ----------------------------------------------------
+
+function game
+
+
+
+
+
   
 
   //* POWER BUTTON FUCTIONALITY---------------------------------
@@ -888,7 +907,6 @@ function init(){
         }
       }
 
-
     } else {
       shipToBeMoved.location.forEach(() =>{
         return tempShip.push((shipRef += 1) - 1)
@@ -943,19 +961,6 @@ function init(){
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   // ? SHIP SELECT TO MOVE FUNCTIONS-----------------------------------------------------
 
   const shipSelectBtns = document.querySelectorAll('.ship-selector')
@@ -963,7 +968,6 @@ function init(){
   function shipSelected (){
     shipToBeMoved = playShipOptions[event.target.value]
   }
-  
   shipSelectBtns.forEach(ship => {
     ship.addEventListener('click',shipSelected)
   })
@@ -987,8 +991,8 @@ function init(){
     secondScreen.style.display = 'flex'
     gameButtons.style.display = 'flex'
     instructions.style.display = 'flex'
-    barbossa.style.display = 'flex'
-    main.style.justifyContent = 'space-between'
+    // barbossa.style.display = 'flex'
+    // main.style.justifyContent = 'space-between'
   }
 
   nameSubmit.addEventListener('click',introDisappear)
@@ -1004,9 +1008,9 @@ function init(){
     gameButtons.style.display = 'none'
     instructions.style.display = 'none'  
     compGrid.style.display = 'flex'
-    barbossa.style.display = 'none'
-    main.style.justifyContent = 'center'
     tauntBox.style.display = 'flex'
+    // barbossa.style.display = 'none'
+    main.style.justifyContent = 'center'
 
   }
   confirmShips.addEventListener('click',toWar)
@@ -1016,18 +1020,72 @@ function init(){
   const tauntsBox = document.getElementById('taunt-text')
 
   function alreadyShot(){
-    tauntsBox.innerHTML = 'captain, we already shot there'
+    tauntsBox.style.display = 'flex'
+    tauntsBox.innerHTML = 'Captain, it may be the rum but we already fired there. Have another try'
+  }
+
+
+  // function playerMiss(){
+  //   tauntsBox.style.display = 'flex'
+  //   tauntsBox.innerHTML = 'Argh Captain, that was a miss'
+  // }
+
+  function playerHitComp(){
+    tauntsBox.style.display = 'flex'
+    tauntsBox.innerHTML = 'Good shot Captain, rum to celebrate?'
+  }
+
+  // function compMissPlayer(){
+  //   tauntsBox.style.display = 'flex'
+  //   tauntsBox.innerHTML = 'Ill get you next time Sparrow'
+  // }
+
+  function compHitPlayer(){
+    tauntsBox.style.display = 'flex'
+    tauntsBox.innerHTML = 'Told ye! The Pearl will be mine!'
   }
 
 
 
+  // ? FINISH SCREEN ----------------------------------------------------
+  
+  const playerWins = document.getElementById('player-won')
+  
+  function playerWon(){
+    secondScreen.style.display = 'none'
+    tauntBox.style.display = 'none'
+    playerWins.style.display = 'flex'
+  }
+
+  const playerLoses = document.getElementById('player-lost')
+
+  function playerLost(){
+    secondScreen.style.display = 'none'
+    tauntBox.style.display = 'none'
+    playerLoses.style.display = 'flex'
+
+  }
+  
+  
+
+  
 
 
 
+  
+  
 
 
+  
+  
 
 
+  
+  
+
+
+  
+  
 
 
   

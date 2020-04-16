@@ -2,7 +2,6 @@
   box-sizing: border-box;
   font-family: "piratefont";
   margin: 0;
-
 }
 
 body {
@@ -14,8 +13,8 @@ body {
   background-image: url(../assets/pirate-background.jpg);
   background-size: cover;
   margin: 0;
-
 }
+
 header{
   display: flex;
   align-items: center;
@@ -29,7 +28,7 @@ header{
   width: 500px;
   min-height: 90px;
   margin: 5px 0px;
-  text-shadow: 2px 2px #d18585;
+  text-shadow: 2px 2px #888888;
 }
 #center-text{
   font-size: 20px;
@@ -101,10 +100,19 @@ p{
   background: radial-gradient(circle, rgba(230,16,16,1) 0%, rgba(140,25,9,1) 85%);
   color: white;
   text-shadow: 2px 2px #493232;
-  box-shadow: 0px 0px 10px #888888;
-
   border: none
 }
+
+#name-submit:hover {
+  box-shadow: 0px 0px 10px #888888;
+	transition:all 0.3s ease-in-out;
+}
+
+
+#name-submit:focus{
+  outline:0;
+}
+
 
 button{
   height: 40px;
@@ -119,6 +127,8 @@ instructions{
   width: 350px;
   height: 90%;
   background: radial-gradient(circle, rgba(230,201,16,1) 0%, rgba(140,104,9,0.7525385154061625) 85%);
+  margin-top: 30px;
+  margin-left: 30px;
 
   /* background-color: green; */
 }
@@ -157,7 +167,15 @@ sub-instructions{
   width: 100px;
   height: 75px;
   border: none;
-  box-shadow: 0px 0px 10px #888888;
+}
+
+.start-btn:hover {
+  box-shadow: 0px 0px 14px #1d1c1c;
+	transition:all 0.3s ease-in-out;
+}
+
+.start-btn:focus{
+  outline:0;
 }
 
 barbossa{
@@ -192,22 +210,36 @@ gamebuttons{
 }
 
 ship-selector{
-/* flex-wrap: wrap; */
+  display: flex;
   flex-direction: column;
-justify-content: space-between;
-align-content: space-around;
+justify-content: center;
+align-items: center;
   /* background-color: blue; */
   width: 50%;
+  width: 250px;
   }
 
-  .ship-selector{
-    background-color: rgba(0, 0, 0, 0.0);
-    font-size: 25px;
-    width: 250px;
-    height: 36px;
-    border: none;
-    color: black;
-  }
+.ship-selector{
+  background-color: rgba(0, 0, 0, 0.0);
+  font-size: 25px;
+  width: 150px;
+  height: 36px;
+  border: none;
+  color: black;
+}
+
+.ship-selector:hover{
+  color: #684b4b;
+  transition:all 0.3s ease-in-out;
+}
+
+.ship-selector:focus{
+  background: radial-gradient(circle, #684b4b 0%, #4d3232 85%);
+
+  color: white;
+  transition:all 0.3s ease-in-out;
+  outline:0;
+}
 
 
 .ship-move-btn{
@@ -216,6 +248,16 @@ align-content: space-around;
   border: none;
   color: black;
 }
+
+.ship-move-btn:hover{
+color: #684b4b;
+transition:all 0.3s ease-in-out;
+}
+
+.ship-move-btn:focus{
+  outline:0;
+}
+
 
 movement-buttons{
   display: flex;
@@ -269,8 +311,14 @@ justify-content: center;
   border: none;
   font-size: 25px;
 }
+#confirm-btn:hover {
+  box-shadow: 0px 0px 14px #1d1c1c;
+	transition:all 0.2s ease-in-out;
+}
 
-
+#confirm-btn:focus{
+  outline:0;
+}
 
 .player-grid-wrapper {
   height: 440px;
@@ -287,8 +335,8 @@ justify-content: center;
   justify-content: center;
   height: 400px;
   width: 400px;
-background-image: url(../assets/Blue-sea.-View-from-above-18796.jpg);
-margin: 30px;
+  background-image: url(../assets/Blue-sea.-View-from-above-18796.jpg);
+  margin: 30px;
 }
 
 .player-grid div {
@@ -321,7 +369,7 @@ margin: 30px;
 }
 .player-grid div.miss {
   background-color: rgba(255,255,255,0.4);
-background-image: url(../assets/UIHere.png);
+  background-image: url(../assets/UIHere.png);
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
@@ -365,7 +413,7 @@ background-image: url(../assets/UIHere.png);
 
 
 .grid div.ship {
-  background-color: blue;
+  /* background-color: blue; */
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
@@ -385,21 +433,20 @@ background-image: url(../assets/UIHere.png);
 }
 .grid div.miss {
   background-color: rgba(255,255,255,0.4);
-background-image: url(../assets/UIHere.png);
+  background-image: url(../assets/UIHere.png);
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 
-taunts{
-  display:none;
+#taunts{
+  display: none;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
   width: 75%;
   height: 150px;
   background-color: rgba(255,255,255,0.4);
-  border: blue
 }
 
 jack-sparrow-head{
@@ -428,6 +475,7 @@ taunt-box{
   width: 50%;
 }
 taunt-text{
+  display: none;
   background-color: black;
   color:white;
   height: auto;
@@ -437,5 +485,52 @@ taunt-text{
   padding: 5px;
   border-radius: 7px;
 }
+
+#player-lost{
+  display:none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  margin-top: 20px;
+}
+
+#player-won{
+  display:none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  margin: 20px;
+}
+
+h2{
+  font-size: 50px;
+
+ color: red; 
+ text-shadow: 2px 2px #493232;
+margin: 10px;
+}
+
+
+.reset-button{
+  background: radial-gradient(circle, rgba(230,16,16,1) 0%, rgba(140,25,9,1) 85%);
+  color: white;
+  text-shadow: 2px 2px #da5d5d;
+  width: 300px;
+  height: 75px;
+  border: none;
+  font-size: 25px;
+  margin: 25px;
+}
+.reset-button:hover {
+  box-shadow: 0px 0px 14px #1d1c1c;
+	transition:all 0.2s ease-in-out;
+}
+
+.reset-button:focus{
+  outline:0;
+}
+
 
 
