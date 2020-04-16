@@ -977,6 +977,7 @@ function init(){
   const gameButtons = document.getElementById('game-buttons')
   const instructions = document.getElementById('instructions-div')
   const barbossa = document.getElementById('barbossa')
+  const main = document.getElementById('main')
 
 
 
@@ -985,8 +986,8 @@ function init(){
     secondScreen.style.display = 'flex'
     gameButtons.style.display = 'flex'
     instructions.style.display = 'flex'
-    // barbossa.style.display = 'flex'
-
+    barbossa.style.display = 'flex'
+    main.style.justifyContent = 'space-between'
   }
 
   nameSubmit.addEventListener('click',introDisappear)
@@ -995,13 +996,14 @@ function init(){
   // ? SHIP LOCATOR DISAPPEAR ----------------------------------------------------
 
   const confirmShips = document.getElementById('confirm-btn')
-  const compGrid = document.getElementsByClassName('grid-wrapper')
+  const compGrid = document.getElementById('comp-grid')
 
   function toWar(){
     gameButtons.style.display = 'none'
     instructions.style.display = 'none'  
     compGrid.style.display = 'flex'
-    // barbossa.style.display = 'none'
+    barbossa.style.display = 'none'
+    main.style.justifyContent = 'center'
 
   }
 

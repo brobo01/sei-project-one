@@ -14,7 +14,7 @@
     </style>
   </head>
   <body>
-    <h1>Pirateships of the Caribbean</h1>
+    <header>Pirateships   <center-text id="center-text">of<br>the</center-text>   Caribbean</header>
     
 
       
@@ -22,12 +22,12 @@
     <intro id="intro">
       <intro-contents>
         <a id="jack-sparrow-cover" href="#"></a>
-        <p>As the movie franchise came to an end, it's time for me to take a well earned rest. There's only one thing to do, train my successor to captain The Black Pearl. Now Captain, what do I call you?</p>
-        <input type="text" id="name-input" placeholder="Your name please">
+        <p>As the movie franchise came to an end, it's time for me to take a well earned rest. There's only one thing to do, train my successor to captain The Black Pearl. Now Captain, are ye ready?</p>
+        <!-- <input type="text" id="name-input" placeholder="Your name please"> -->
         <input type="submit" id="name-submit" value="Let's go Captain">
       </intro-contents>  
     </intro>  
-<main>
+<main id='main'>
 
   <instructions id='instructions-div'>
     <p id='instructions'>
@@ -43,7 +43,7 @@
     <div class="player-grid-wrapper">
       <div class="player-grid"></div>
     </div>  
-    <div class="grid-wrapper">
+    <div class="grid-wrapper" id='comp-grid'>
       <div class="grid"></div>
     </div>
   </grids>     
@@ -65,7 +65,7 @@
           <button class='ship-move-btn' id='move-up-btn'>North</button>
           <central-buttons>
             <button class='ship-move-btn' id='move-left-btn'>West</button>
-            <img src="assets/pngkey.com-compass-rose-png-322989.png" id="compass" style="width: 125px; height: 125px;">
+            <img src="assets/pngkey.com-compass-rose-png-322989.png" id="compass" style="width: 100px; height: 100px;">
             <button class='ship-move-btn' id='move-right-btn'>East</button>
           </central-buttons>
           <button class='ship-move-btn' id='move-down-btn'>South</button>
@@ -77,5 +77,11 @@
         <!-- <button class='start-timer-btn'>Power Button</button> -->
       </movement-buttons>
     </gamebuttons>
+
+    <taunts>
+      Taunts will go here
+    </taunts>
+
+
       </body>
 </html>

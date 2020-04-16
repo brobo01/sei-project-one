@@ -15,16 +15,32 @@ body {
   background-size: cover;
   margin: 0;
 }
-h1{
-  text-justify: center;
+header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  font-size: 35px;
+  font-size: 40px;
+  background-image: url(../assets/PngItem_187435.png);
+  background-size: contain;
+  background-position-x: center;
+  background-repeat: no-repeat;
+  width: 500px;
+  min-height: 90px;
+  margin: 5px 0px;
+}
+#center-text{
+  font-size: 20px;
+  color: white;
+  padding: 0px 5px;
+  line-height: 10px;
+  font-style: italic;
 }
 
 main{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   /* background-color: blue; */
 }
@@ -37,7 +53,9 @@ intro{
   background-color: rgba(145, 141, 132, 0.5);
   background-image: url(../assets/NicePng_jack-swagger-png_7676125.png);
   background-size: cover;
-  width: 75%;
+  width: 55%;
+  margin-top: 50px;
+  padding: 5px;
   text-align: left;
 }
 
@@ -45,7 +63,7 @@ intro-contents {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: 45%;
   padding: 25px;
 }
 
@@ -70,7 +88,7 @@ p{
   font-size: 20px;
   letter-spacing: 4px;
   text-justify: center;
-  background-color: red;
+  background: radial-gradient(circle, rgba(230,16,16,1) 0%, rgba(140,25,9,1) 85%);
   color: white;
   border: none
 }
@@ -78,13 +96,15 @@ p{
 button{
   height: 40px;
   width: 75px;
+  
+
 }
 
 instructions{
   display: none;
   flex-direction: column;
   width: 350px;
-  height: 90%%;
+  height: 90%;
   /* background-color: green; */
 }
 
@@ -105,7 +125,7 @@ sub-instructions{
 }
 
 #jack-headshot{
-  height:70%;
+  height:80%;
   width: 50%;
   background-image: url(../assets/Jack-headshot.png);
   background-repeat: no-repeat;
@@ -113,7 +133,9 @@ sub-instructions{
 }
 
 .start-btn{
-  background-color: red;
+
+  background: radial-gradient(circle, rgba(230,16,16,1) 0%, rgba(140,25,9,1) 85%);
+
   color: white;
   font-size: 25px;
   width: auto;
@@ -145,15 +167,16 @@ gamebuttons{
   justify-content: space-between;
   background-image: url(../assets/abstract-ancient-antique-art-235985.jpg);
   width: 750px;
+  height: 180px;
   background-size: cover;
   background-repeat: no-repeat;
-  margin: 25px;
+  margin: 10px;
 }
 
 ship-selector{
 /* flex-wrap: wrap; */
   flex-direction: column;
-justify-content: center;
+justify-content: space-between;
 align-content: space-around;
   /* background-color: blue; */
   width: 50%;
@@ -163,6 +186,7 @@ align-content: space-around;
     background-color: rgba(0, 0, 0, 0.0);
     font-size: 25px;
     width: 250px;
+    height: 36px;
     border: none;
     color: black;
   }
@@ -220,7 +244,7 @@ justify-content: center;
   width: 250px;
 }
 #confirm-btn{
-  background-color: red;
+  background: radial-gradient(circle, rgba(230,16,16,1) 0%, rgba(140,25,9,1) 85%);
   color: white;
   width: 150px;
   border: none;
@@ -245,7 +269,7 @@ justify-content: center;
   height: 400px;
   width: 400px;
 background-image: url(../assets/Blue-sea.-View-from-above-18796.jpg);
-margin: 0px 20px;
+margin: 30px;
 }
 
 .player-grid div {
@@ -270,13 +294,15 @@ margin: 0px 20px;
 }
 
 .player-grid div.hit {
-  background-color: red;
+  /* background-color: red; */
+  background-image: url(../assets/explosion.png);
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 .player-grid div.miss {
-  background-color: blue;
+  background-color: rgba(255,255,255,0.4);
+background-image: url(../assets/UIHere.png);
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
@@ -291,8 +317,8 @@ margin: 0px 20px;
 
 
 .grid-wrapper {
+  display: none;
   height: 440px;
-  display: flex;
   justify-content: center;
 }
 
@@ -307,7 +333,7 @@ margin: 0px 20px;
   width: 400px;
   background-image: url(../assets/abstract-ancient-antique-art-235985.jpg);
   background-size: cover;
-  margin: 0px 20px;
+  margin: 30px;
 }
 
 .grid div {
@@ -327,7 +353,7 @@ margin: 0px 20px;
 }
 
 .grid div.hit {
-  background-color: orange;
+  background-image: url(../assets/explosion.png);
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
@@ -339,10 +365,17 @@ margin: 0px 20px;
   cursor: pointer;
 }
 .grid div.miss {
-  background-color: pink;
+  background-color: rgba(255,255,255,0.4);
+background-image: url(../assets/UIHere.png);
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
+}
+
+taunts{
+  width: 75%;
+  height: 200px;
+  background-color: brown;
 }
 
 
