@@ -280,7 +280,7 @@ function init(){
       return ship === true
     }
     )){
-      playerWon()
+      playerWonDelay()
       console.log('You have won')
     }
   }
@@ -298,7 +298,7 @@ function init(){
     }
     )){
       console.log(playSunkShips)
-      playerLost()
+      playerLostDelay()
       console.log('Computer has won')
     }
 
@@ -316,7 +316,6 @@ function init(){
   // ? SHOT TAKING CALCS---------------------------------------------
 
   // * Computer Shot Calcs
-  const shotBtn = document.querySelector('.shoot')
   const fullCompShots = []
   const compShotsTaken = []
   const compHits = []
@@ -361,19 +360,12 @@ function init(){
     })
   }
 
-
-
-
-
-
   function getShipType(shot){
     playShipOptions.forEach(ship => {
       if (ship.location.includes(shot)){
         playHitShips.push(ship.type)
-
       }
     }
-    
     )
   }
 
@@ -443,7 +435,6 @@ function init(){
       }
     }
   }
-  
 
   function hunterThree(){
     nextShot = []
@@ -595,16 +586,12 @@ function init(){
   
   
   
-  
-  // ,12,13,14,15,27,37,47,56,66,42,52,62,72,85,86,32,33,34,87,10
-  
-  let nextShot = [11]
+    
+  let nextShot = []
 
   getFullShotList()
   
-  function computerShot (){
-    console.log(nextShot)
-    
+  function computerShot (){    
     filterCompShots()
     if (compShotsTaken.includes(nextShot[0])){
       nextShot.splice(0,1)
@@ -613,13 +600,10 @@ function init(){
       nextShot.splice(0,1)
     }
     if (nextShot.length === 0){
-      console.log('close shave')
       chooseNextShot()
     }
-    console.log(compShotsTaken)
     const shot = nextShot[0]
     nextShot.splice(0,1)
-    console.log(hunterRef)
     compShotsTaken.push(shot)
     checkHit(shot)
     playerHit()
@@ -628,19 +612,10 @@ function init(){
       compHits.push(shot)
       compResults.push('hit')
       playHitLocations.push(shot)
-      // getShipType(shot)
       hunterRef.push(1)
       targetShip.push(shot)
-      // if (playHitShips[1] === playHitShips[0]){
-      //   console.log('same same')
       nextShot = []
-      compHitPlayer()
-
-      // } else {
-      //   console.log('but different')
-      //   nextShot.splice(0,1)
-
-      // } 
+      compHitPlayer() 
     } else {
       playerCells[shot].classList.add('miss')
       compResults.push('miss')
@@ -652,18 +627,12 @@ function init(){
     filterCompShots()
     checkPlaySunk()
     checkCompWin()
-
-
-
-
-
     if (playerCells[shot].classList.contains('sunk')){
       hunterRef = []
       nextShot.push(availableCompShots[Math.floor(Math.random() * availableCompShots.length)])
       targetShip = []
       console.log('ship sunk')
     }
-    
   }
 
 
@@ -682,32 +651,31 @@ function init(){
       alreadyShot()
       shot = []
     } else {
-
       checkCompHit(shot)
       compHit()
       if (compCells[shot].classList.contains('ship')){
         compHitLocations.push(shot)
         playerHitComp()
-      // console.log('ship hit')
       } else {
         event.target.classList.add('miss')
-        // playerMiss()
-      // console.log('ship miss')
       }
       checkCompSunk()
-      computerShot()
       checkPlayWin()
       fullPlayShots.push(shot)
+      computerShotDelay()
     }
   }
     
+
+  function computerShotDelay(){
+    setTimeout(computerShot,1100)
+  }
 
   // ? GAME LOOP ----------------------------------------------------
 
   const startBtn = document.querySelector('.start-btn')
 
   
-  // Make this disappear after it has been clicked
   function startGame (){
     createCompShips()
     createPlayShips()
@@ -718,9 +686,15 @@ function init(){
 
   // ? RESET FUNCTION ----------------------------------------------------
 
-function game
+  const resetBtn = document.querySelector('.reset-button')
 
 
+
+  function gameReset(){
+    window.location.reload()
+  }
+
+  resetBtn.addEventListener('click',gameReset)
 
 
 
@@ -731,17 +705,8 @@ function game
   // function shotModifier(tempShot){
   //   return tempShot + 1
   // }
-
-
-
-
-
-
     
   // const startTimerBtn = document.querySelector('.start-timer-btn')
-
-
-
 
   // startTimerBtn.addEventListener('mousedown',start)
   // startTimerBtn.addEventListener('mouseup',stop)
@@ -749,7 +714,6 @@ function game
   // let startTime = []
   // let endTime = []
   // let timeTaken = []
-
 
   // function start(){
   //   startTime = new Date()
@@ -851,8 +815,6 @@ function game
 
   moveUpBtn.addEventListener('click',moveShipUp)
 
-
-
   // ? MOVE PLAYER SHIP DOWN FUNCTION-------------------------------------------
 
   const moveDownBtn = document.querySelector('#move-down-btn')
@@ -879,9 +841,7 @@ function game
 
   moveDownBtn.addEventListener('click',moveShipDown)
 
-
-
-  // ? ROTATE PLAYER SHIP DOWN FUNCTION-------------------------------------------
+  // ? ROTATE PLAYER SHIP FUNCTION-------------------------------------------
 
   const rotateBtn = document.querySelector('#rotate-btn')
 
@@ -892,26 +852,23 @@ function game
       shipToBeMoved.location.forEach(() =>{
         return tempShip.push((shipRef += 10) - 10)
       })
-
       const tempPlayShipLocations = allPlayShipLocations.filter(location => {
         return !shipToBeMoved.location.includes(location)
       })
       if (tempPlayShipLocations.some(num => {
         return tempShip.includes(num)
       })){
-        window.alert('there is a ship there dumb dumb')
+        window.alert('There is a ship there Captain')
       } else { 
         if (tempShip[tempShip.length - 1] < cellCount - 1) {   
           approvedNewShipLocationProcess(tempShip)
           tempShip = []
         }
       }
-
     } else {
       shipToBeMoved.location.forEach(() =>{
         return tempShip.push((shipRef += 1) - 1)
       })
-    
       const tempPlayShipLocations = allPlayShipLocations.filter(location => {
         return !shipToBeMoved.location.includes(location)
       })
@@ -946,7 +903,6 @@ function game
 
   confirmBtn.addEventListener('click',confirmLocations)
 
-
   // ? ADDITIONAL MOVE SHIP FUNCTION
 
   function approvedNewShipLocationProcess(tempShip){
@@ -960,13 +916,16 @@ function game
     allPlayShipLocate()
   }
 
-
   // ? SHIP SELECT TO MOVE FUNCTIONS-----------------------------------------------------
 
   const shipSelectBtns = document.querySelectorAll('.ship-selector')
   
   function shipSelected (){
     shipToBeMoved = playShipOptions[event.target.value]
+    shipToBeMoved.location.forEach(location =>{
+      location.classList.add('tempship')
+    })
+    console.log(shipToBeMoved)
   }
   shipSelectBtns.forEach(ship => {
     ship.addEventListener('click',shipSelected)
@@ -985,6 +944,9 @@ function game
   const main = document.getElementById('main')
 
 
+  function introDisappearDelay (){
+    setTimeout(introDisappear, 500)
+  }
 
   function introDisappear() {
     introScreen.style.display = 'none'
@@ -995,7 +957,7 @@ function game
     // main.style.justifyContent = 'space-between'
   }
 
-  nameSubmit.addEventListener('click',introDisappear)
+  nameSubmit.addEventListener('click',introDisappearDelay)
 
 
   // ? SHIP LOCATOR DISAPPEAR ----------------------------------------------------
@@ -1003,6 +965,11 @@ function game
   const confirmShips = document.getElementById('confirm-btn')
   const compGrid = document.getElementById('comp-grid')
   const tauntBox = document.getElementById('taunts')
+
+  function toWarDelay(){
+    setTimeout(toWar,500)
+  }
+
 
   function toWar(){
     gameButtons.style.display = 'none'
@@ -1013,7 +980,7 @@ function game
     main.style.justifyContent = 'center'
 
   }
-  confirmShips.addEventListener('click',toWar)
+  confirmShips.addEventListener('click',toWarDelay)
 
   // ? TAUNTS BOX ----------------------------------------------------
 
@@ -1032,7 +999,7 @@ function game
 
   function playerHitComp(){
     tauntsBox.style.display = 'flex'
-    tauntsBox.innerHTML = 'Good shot Captain, rum to celebrate?'
+    tauntsBox.innerHTML = playerHitTaunts[Math.floor(Math.random() * playerHitTaunts.length)]
   }
 
   // function compMissPlayer(){
@@ -1042,7 +1009,7 @@ function game
 
   function compHitPlayer(){
     tauntsBox.style.display = 'flex'
-    tauntsBox.innerHTML = 'Told ye! The Pearl will be mine!'
+    tauntsBox.innerHTML = compHitTaunts[Math.floor(Math.random() * compHitTaunts.length)]
   }
 
 
@@ -1051,6 +1018,10 @@ function game
   
   const playerWins = document.getElementById('player-won')
   
+  function playerWonDelay(){
+    setTimeout(playerWon,1000)
+  }
+
   function playerWon(){
     secondScreen.style.display = 'none'
     tauntBox.style.display = 'none'
@@ -1059,17 +1030,23 @@ function game
 
   const playerLoses = document.getElementById('player-lost')
 
+  function playerLostDelay(){
+    setTimeout(playerLost,1000)
+  }
+
   function playerLost(){
     secondScreen.style.display = 'none'
     tauntBox.style.display = 'none'
     playerLoses.style.display = 'flex'
-
   }
   
   
+  const playerHitTaunts = ['Good shot Captain, rum to celebrate?','More like that please Captain','DONT LET THEM TAKE MY RUM','You got her right in the stern','Are you Master Baites?','That got me timbers shivering','Get your plank out','Is that your peg leg Captain?'
+  ]
 
-  
 
+  const compHitTaunts = ['Told ye! The Pearl will be mine!','No hard feelings, aye Captain','Jack, take that land lubber back to Tortuga','This is too easy, let me put on a blindfold','Say hello to Davy Jones','Did you remember to put cannon balls in?','The pirate life is not for you','Get the rum out, this will be over shortly','Like taking candy from a child','Like taking rum from Jack Sparrow','Sometimes I feel like dancing','Ready to dance a gallows jig, Jack?','Tharrr she blows','Want to scrub my poop deck?','Roger, the Cabin Boy?'
+  ]
 
 
   

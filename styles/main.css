@@ -212,9 +212,8 @@ gamebuttons{
 ship-selector{
   display: flex;
   flex-direction: column;
-justify-content: center;
-align-items: center;
-  /* background-color: blue; */
+  justify-content: center;
+  align-items: center; 
   width: 50%;
   width: 250px;
   }
@@ -222,7 +221,7 @@ align-items: center;
 .ship-selector{
   background-color: rgba(0, 0, 0, 0.0);
   font-size: 25px;
-  width: 150px;
+  width: 200px;
   height: 36px;
   border: none;
   color: black;
@@ -241,7 +240,6 @@ align-items: center;
   outline:0;
 }
 
-
 .ship-move-btn{
   background-color: rgba(0, 0, 0, 0.0);
   font-size: 25px;
@@ -257,7 +255,6 @@ transition:all 0.3s ease-in-out;
 .ship-move-btn:focus{
   outline:0;
 }
-
 
 movement-buttons{
   display: flex;
@@ -382,7 +379,6 @@ justify-content: center;
   cursor: pointer;
 }
 
-
 .grid-wrapper {
   display: none;
   height: 440px;
@@ -410,10 +406,15 @@ justify-content: center;
   width: 10%;
 }
 
-
-
 .grid div.ship {
-  /* background-color: blue; */
+  background-color: blue;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.grid div.tempship {
+  background-color: green;
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
