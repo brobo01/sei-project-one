@@ -1,18 +1,13 @@
 function init(){
-
   
-
-
-
-  // ? DOM Elements
+  // ?GRID VARIABLES---------------------------------------------------------------
+  const width = 10
+  const cellCount = width * width 
+  
+  // ?CREATE COMP CELLS---------------------------------------------------------------
   const grid = document.querySelector('.grid')
   const compCells = []
   
-  // ? Grid Variables
-  const width = 10
-  const cellCount = width * width 
-    
-  // ? Functions
   function createCompCells() {
     for (let i = 0; i < cellCount; i++){
       const cell = document.createElement('div')
@@ -21,16 +16,13 @@ function init(){
       compCells.push(cell)
     }
   }
-  
+
   createCompCells()
 
-
-  // ? DOM Elements
+  // ?CREATE PLAYER CELLS---------------------------------------------------------------
   const playerGrid = document.querySelector('.player-grid')
   const playerCells = []
-
   
-  // ? Functions
   function createPlayerCells() {
     for (let i = 0; i < cellCount; i++){
       const cell = document.createElement('div')
@@ -39,10 +31,9 @@ function init(){
       playerCells.push(cell)
     }
   }
-
   createPlayerCells()
 
-  
+  // ? COMP AND PLAYER SHIP LISTS--------------------------------------------------------------------
 
   const compCarrier = {
     length: 5,
@@ -132,6 +123,8 @@ function init(){
     })
   }
 
+  // ? CREAT HORIZONTAL OR VERTICAL COMP SHIP
+
 
   function createShip (ship){
     return (Math.round(Math.random()) > 0) ? createHorizontalShip(ship) : createVerticalShip(ship)
@@ -187,19 +180,21 @@ function init(){
     })
     return newNums[Math.floor(Math.random() * newNums.length)]
   }
+
+  // ? CREAT COMP SHIPS AND ADD FORMATTING-----------------
+  
   function createCompShips(){
     compShipOptions.forEach(ship => {
       createShip(ship)
     })
-
-    // ? ADD SHIP FORMATTING TO BOTH COMP AND PLAYER SHIPS -----------------
     compShipOptions.forEach(ship => {
       ship.location.forEach(location => { 
         compCells[location].classList.add('ship')
       })
     })
   }
-
+  
+  // ? CREAT PLAY SHIPS AND ADD FORMATTING-----------------
 
   function createPlayShips(){
     // playShipOptions.forEach(ship => {
@@ -207,7 +202,6 @@ function init(){
     // })
     formatPlayShips()
   }
-  
   function removePlayShips(){  
     playShipOptions.forEach(ship => {
       ship.location.forEach(location => { 
@@ -301,19 +295,10 @@ function init(){
       playerLostDelay()
       console.log('Computer has won')
     }
-
-
-
-
-
-
-
-
-
   }
 
 
-  // ? SHOT TAKING CALCS---------------------------------------------
+  // ? COMP SHOT TAKING CALCS---------------------------------------------
 
   // * Computer Shot Calcs
   const fullCompShots = []
@@ -338,7 +323,7 @@ function init(){
     // console.log(availableCompShots)
   }
   
-
+  // ? CHECK COMP AND PLAYER HIT FUNCTIONS------------------------------------------------
 
   function checkHit(shot){
     playShipOptions.forEach(ship => {
@@ -373,6 +358,7 @@ function init(){
   let hunterRef = []
   let targetShip = []
 
+  // * hunterOne sends the four cells around the hit cell to the next shot array, this is then cleared when there is a second hit and hunterRef is increased by one to call hunterTwo which focuses on the direction of the ship
 
   function hunterOne (){
     
@@ -405,11 +391,9 @@ function init(){
     nextShot = []
     let hunterTwoShot = []
     if (targetShip[1] % width === 0 && (targetShip[1] - targetShip[0] === 1 || targetShip[1] - targetShip[0] === -1)){
-      console.log('fuck 2')
       hunterRef.push(1)
       hunterRevOne()
     } if (targetShip[1] <= width - 1 && (targetShip[1] - targetShip[0] === 10 || targetShip[1] - targetShip[0] === -10)){
-      console.log('fuck 3')
       hunterRef.push(1)
       hunterRevOne()
     } else {
@@ -427,7 +411,6 @@ function init(){
         hunterTwoShot = targetShip[1]
       }
       if (compResults[compResults.length - 1] === 'miss' || playerCells[hunterTwoShot].classList.contains('miss')){
-        console.log('fuck 4')
         hunterRef.push(1)
         hunterRevOne()
       } else {
@@ -441,10 +424,8 @@ function init(){
     let hunterThreeShot = []
 
     if (targetShip[2] % width === 0 && (targetShip[1] - targetShip[0] === 1 || targetShip[1] - targetShip[0] === -1)){
-      console.log('fuck 3')
       hunterRevOne()
     } if (targetShip[2] <= width - 1 && (targetShip[1] - targetShip[0] === 10 || targetShip[1] - targetShip[0] === -10)){
-      console.log('fuck 4')
       hunterRevOne()
     } if (targetShip[2] === cellCount - 1){
       hunterThreeShot = targetShip[2]
@@ -472,7 +453,6 @@ function init(){
     let hunterFourShot = []
     
     if (targetShip[3] % width === 0 && (targetShip[1] - targetShip[0] === 1 || targetShip[1] - targetShip[0] === -1)){
-      console.log('fuck 4')
       hunterRevOne()
     } if (targetShip[3] <= width - 1 && (targetShip[1] - targetShip[0] === 10 || targetShip[1] - targetShip[0] === -10)){
       hunterRef.push(1)
@@ -499,7 +479,7 @@ function init(){
     }
   }
 
-
+  // *When the hunter function either hits the edge of the map or a cell with the class missed - hunterRev is called
 
   function hunterRevOne() {
     console.log('hunterOneRev')
@@ -541,7 +521,7 @@ function init(){
     } if (targetShip[1] - targetShip[0] === -10){
       hunterRevTwoShot.push(targetShip[0] - (targetShip[1] - targetShip[0]) * 2)    
     } else {
-      console.log('damn')
+      console.log('damn damn')
     }
     nextShot.push(parseInt(hunterRevTwoShot))
 
@@ -559,7 +539,7 @@ function init(){
     } if (targetShip[1] - targetShip[0] === -10){
       nextShot.push(targetShip[0] - (targetShip[1] - targetShip[0]) * 3)    
     } else {
-      console.log('damn')
+      console.log('damn damn damn')
     }
 
   }
@@ -575,7 +555,6 @@ function init(){
     } else if (hunterRef.length === 4){
       hunterFour()
     } else if (hunterRef.length === 13){
-      console.log('whhhhy')
       hunterRevTwo()
     } else if (hunterRef.length === 14){
       hunterRevThree()
@@ -583,9 +562,6 @@ function init(){
       nextShot.push(availableCompShots[Math.floor(Math.random() * availableCompShots.length)])
     }
   }
-  
-  
-  
     
   let nextShot = []
 
@@ -635,13 +611,7 @@ function init(){
     }
   }
 
-
-
-  
-
   // ? PLAYER SHOT ----------------------------------------------------
-
-  // * Function
 
   const fullPlayShots = []
 
@@ -666,16 +636,14 @@ function init(){
     }
   }
     
-
   function computerShotDelay(){
-    setTimeout(computerShot,1100)
+    setTimeout(computerShot,1000)
   }
 
   // ? GAME LOOP ----------------------------------------------------
 
   const startBtn = document.querySelector('.start-btn')
 
-  
   function startGame (){
     createCompShips()
     createPlayShips()
@@ -688,17 +656,11 @@ function init(){
 
   const resetBtn = document.querySelector('.reset-button')
 
-
-
   function gameReset(){
     window.location.reload()
   }
 
   resetBtn.addEventListener('click',gameReset)
-
-
-
-  
 
   //* POWER BUTTON FUCTIONALITY---------------------------------
 
@@ -734,9 +696,11 @@ function init(){
 
 
 
-  //* PLAYER SHIP MOVEMENT FUNCTION BEFORE BATTLE---------------------------------
+  //? PLAYER SHIP MOVEMENT FUNCTION BEFORE BATTLE---------------------------------
+  // * Ship select buttons call the ship which its location is to be modified, for each function, the desired move/new location is pushed into tempShip so that this can be checked against the sides of the grid and other ships. If tempShip is clear of ships and in the grid, then the array is push to the selected ship and reformatted so it appears in the new location. tempShip is cleared when a new ship is selected.
+  
+  
   let shipToBeMoved = ''
-
 
   // ? MOVE PLAYER SHIP RIGHT FUNCTION--------------------------------------------
 
@@ -762,8 +726,6 @@ function init(){
 
   moveRightBtn.addEventListener('click',moveShipRight)
 
-
-
   // ? MOVE PLAYER SHIP LEFT FUNCTION-------------------------------------------
 
   const moveLeftBtn = document.querySelector('#move-left-btn')
@@ -788,7 +750,6 @@ function init(){
   }
 
   moveLeftBtn.addEventListener('click',moveShipLeft)
-
 
   // ? MOVE PLAYER SHIP UP FUNCTION-------------------------------------------
 
@@ -931,8 +892,6 @@ function init(){
     ship.addEventListener('click',shipSelected)
   })
 
-
-
   // ?  INTRO DISAPPEAR AND BRING UP SHIP LOCATOR---------------------------------------------------
 
   const nameSubmit = document.getElementById('name-submit')
@@ -940,9 +899,7 @@ function init(){
   const secondScreen = document.getElementById('grids')
   const gameButtons = document.getElementById('game-buttons')
   const instructions = document.getElementById('instructions-div')
-  const barbossa = document.getElementById('barbossa')
   const main = document.getElementById('main')
-
 
   function introDisappearDelay (){
     setTimeout(introDisappear, 500)
@@ -953,8 +910,7 @@ function init(){
     secondScreen.style.display = 'flex'
     gameButtons.style.display = 'flex'
     instructions.style.display = 'flex'
-    // barbossa.style.display = 'flex'
-    // main.style.justifyContent = 'space-between'
+
   }
 
   nameSubmit.addEventListener('click',introDisappearDelay)
@@ -970,7 +926,6 @@ function init(){
     setTimeout(toWar,500)
   }
 
-
   function toWar(){
     gameButtons.style.display = 'none'
     instructions.style.display = 'none'  
@@ -985,34 +940,49 @@ function init(){
   // ? TAUNTS BOX ----------------------------------------------------
 
   const tauntsBox = document.getElementById('taunt-text')
+  const jackHead = document.getElementById('jack-sparrow-head')
+  const barbossaHead = document.getElementById('barbossa-head')
 
   function alreadyShot(){
     tauntsBox.style.display = 'flex'
+    jackHead.style.display = 'flex'
     tauntsBox.innerHTML = 'Captain, it may be the rum but we already fired there. Have another try'
+    tauntDisappearDelay()
+
   }
-
-
-  // function playerMiss(){
-  //   tauntsBox.style.display = 'flex'
-  //   tauntsBox.innerHTML = 'Argh Captain, that was a miss'
-  // }
 
   function playerHitComp(){
     tauntsBox.style.display = 'flex'
+    jackHead.style.display = 'flex'
+    barbossaHead.style.display = 'none'
     tauntsBox.innerHTML = playerHitTaunts[Math.floor(Math.random() * playerHitTaunts.length)]
+    tauntDisappearDelay()
   }
-
-  // function compMissPlayer(){
-  //   tauntsBox.style.display = 'flex'
-  //   tauntsBox.innerHTML = 'Ill get you next time Sparrow'
-  // }
 
   function compHitPlayer(){
     tauntsBox.style.display = 'flex'
+    jackHead.style.display = 'none'
+    barbossaHead.style.display = 'flex'
     tauntsBox.innerHTML = compHitTaunts[Math.floor(Math.random() * compHitTaunts.length)]
+    tauntDisappearDelay()
   }
 
+  function tauntDisappear(){
+    tauntsBox.style.display = 'none'
+    jackHead.style.display = 'none'
+    barbossaHead.style.display = 'none'
+  }
 
+  function tauntDisappearDelay(){
+    setTimeout(tauntDisappear,2000)
+  }
+
+  const playerHitTaunts = ['Good shot Captain, rum to celebrate?','More like that please Captain','DONT LET THEM TAKE MY RUM','You got her right in the stern','Are you Master Baites?','That got me timbers shivering','Get your plank out','Is that your peg leg Captain?','Why fight when we can negotiate?','BUT WHY IS THE RUM GONE','Wherever we want to go, we’ll go'
+  ]
+
+
+  const compHitTaunts = ['Told ye! The Pearl will be mine!','No hard feelings, aye Captain','Jack, take that land lubber back to Tortuga','This is too easy, let me put on a blindfold','Say hello to Davy Jones','Did you remember to put cannon balls in?','The pirate life is not for you','Get the rum out, this will be over shortly','Like taking candy from a child','Like taking rum from Jack Sparrow','Sometimes I feel like dancing','Ready to dance a gallows jig, Jack?','Tharrr she blows','Want to scrub my poop deck?','Roger, the Cabin Boy?'
+  ]
 
   // ? FINISH SCREEN ----------------------------------------------------
   
@@ -1039,32 +1009,6 @@ function init(){
     tauntBox.style.display = 'none'
     playerLoses.style.display = 'flex'
   }
-  
-  
-  const playerHitTaunts = ['Good shot Captain, rum to celebrate?','More like that please Captain','DONT LET THEM TAKE MY RUM','You got her right in the stern','Are you Master Baites?','That got me timbers shivering','Get your plank out','Is that your peg leg Captain?'
-  ]
-
-
-  const compHitTaunts = ['Told ye! The Pearl will be mine!','No hard feelings, aye Captain','Jack, take that land lubber back to Tortuga','This is too easy, let me put on a blindfold','Say hello to Davy Jones','Did you remember to put cannon balls in?','The pirate life is not for you','Get the rum out, this will be over shortly','Like taking candy from a child','Like taking rum from Jack Sparrow','Sometimes I feel like dancing','Ready to dance a gallows jig, Jack?','Tharrr she blows','Want to scrub my poop deck?','Roger, the Cabin Boy?'
-  ]
-
-
-  
-  
-
-
-  
-  
-
-
-  
-  
-
-
-  
-  
-
-
   
   
 }

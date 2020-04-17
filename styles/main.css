@@ -71,8 +71,6 @@ intro-contents {
 }
 
 p{
-  /* background-color: rgba(238, 166, 11, 0.5); */
-
   font-size: 25px;
   color: brown;
   padding: 25px;
@@ -80,7 +78,8 @@ p{
 
 #intro-text{
   background: radial-gradient(circle, rgba(230,201,16,1) 0%, rgba(140,104,9,0.7525385154061625) 85%);
-
+  text-align: center;
+  border-radius: 3px;
 }
 
 #name-input{
@@ -92,34 +91,35 @@ p{
 
 #name-submit{
   font-family: "piratefont";
+  background: radial-gradient(circle, rgba(230,16,16,1) 0%, rgba(140,25,9,1) 85%);
+  text-justify: center;
   margin-top: 25px;
   height: 55px;
-  font-size: 20px;
-  letter-spacing: 4px;
-  text-justify: center;
-  background: radial-gradient(circle, rgba(230,16,16,1) 0%, rgba(140,25,9,1) 85%);
   color: white;
   text-shadow: 2px 2px #493232;
-  border: none
+  font-size: 20px;
+  letter-spacing: 4px;
+  border: none;
+  border-radius: 3px;
 }
 
 #name-submit:hover {
-  box-shadow: 0px 0px 10px #888888;
+  box-shadow: 0px 0px 10px #0a0a0a;
 	transition:all 0.3s ease-in-out;
 }
 
-
 #name-submit:focus{
   outline:0;
+  background: radial-gradient(circle, rgb(200, 13, 13) 0%, rgb(100, 18, 17) 85%);
 }
 
 
 button{
   height: 40px;
   width: 75px;
-  
-
 }
+
+/*? INSTRUCTION PAGE FORMATTING--------------------------------------------------------------------- */
 
 instructions{
   display: none;
@@ -129,9 +129,9 @@ instructions{
   background: radial-gradient(circle, rgba(230,201,16,1) 0%, rgba(140,104,9,0.7525385154061625) 85%);
   margin-top: 30px;
   margin-left: 30px;
+  border-radius: 3px;
 
-  /* background-color: green; */
-}
+}  
 
 sub-instructions{
   display: flex;
@@ -140,10 +140,7 @@ sub-instructions{
   justify-content: space-around;
   height:100%;
   background-color: none;
-  /* background-color: rgba(238, 166, 11, 0.5); */
-
-}
-
+}  
 
 #instructions{
   font-size: 20px;
@@ -158,15 +155,15 @@ sub-instructions{
   background-size: cover;
 }
   
-  .start-btn{
-
-  background: radial-gradient(circle, rgba(230,16,16,1) 0%, rgba(140,25,9,1) 85%);
-  text-shadow: 2px 2px #493232;
-  color: white;
-  font-size: 25px;
-  width: 100px;
-  height: 75px;
-  border: none;
+.start-btn{
+background: radial-gradient(circle, rgba(230,16,16,1) 0%, rgba(140,25,9,1) 85%);
+text-shadow: 2px 2px #493232;
+color: white;
+font-size: 25px;
+width: 100px;
+height: 75px;
+border: none;
+border-radius: 3px;
 }
 
 .start-btn:hover {
@@ -175,6 +172,7 @@ sub-instructions{
 }
 
 .start-btn:focus{
+  background: radial-gradient(circle, rgb(200, 13, 13) 0%, rgb(100, 18, 17) 85%);
   outline:0;
 }
 
@@ -185,6 +183,7 @@ barbossa{
   /* background-color: green; */
 }
 
+/*? GRID DIV FORMATTING--------------------------------------------------------------------- */
 
 grids{
 display: none;
@@ -195,6 +194,8 @@ color: none;
 font-size: 0px;
 width: auto;
 }
+
+/*? PLAYER SHIP MOVEMENT BUTTON FORMATTING------------------------------------------------- */
 
 gamebuttons{
   display: none;
@@ -234,10 +235,10 @@ ship-selector{
 
 .ship-selector:focus{
   background: radial-gradient(circle, #684b4b 0%, #4d3232 85%);
-
   color: white;
   transition:all 0.3s ease-in-out;
   outline:0;
+  border-radius: 3px;
 }
 
 .ship-move-btn{
@@ -292,6 +293,8 @@ central-buttons{
   display:flex;
 }
 
+/*? TO WAR BUTTON------------------------------------------------- */
+
 confirm-btn{
   display:flex;
   flex-direction: column;
@@ -300,6 +303,7 @@ justify-content: center;
   height: 100%;
   width: 250px;
 }
+
 #confirm-btn{
   background: radial-gradient(circle, rgba(230,16,16,1) 0%, rgba(140,25,9,1) 85%);
   color: white;
@@ -307,6 +311,7 @@ justify-content: center;
   width: 150px;
   border: none;
   font-size: 25px;
+  border-radius: 3px;
 }
 #confirm-btn:hover {
   box-shadow: 0px 0px 14px #1d1c1c;
@@ -314,8 +319,11 @@ justify-content: center;
 }
 
 #confirm-btn:focus{
+  background: radial-gradient(circle, rgb(200, 13, 13) 0%, rgb(100, 18, 17) 85%);
   outline:0;
 }
+
+/*? PLAYER GRID FORMATTING------------------------------------------------- */
 
 .player-grid-wrapper {
   height: 440px;
@@ -344,7 +352,7 @@ justify-content: center;
 }
 
 .player-grid div.ship {
-  background-color: darkgray;
+  background: linear-gradient(90deg, rgba(117,78,2,1) 0%, rgba(172,114,0,0.8477766106442577) 85%);;
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
@@ -358,8 +366,8 @@ justify-content: center;
 }
 
 .player-grid div.hit {
-  /* background-color: red; */
   background-image: url(../assets/explosion.png);
+  background-color: rgba(117,78,2, 0.4);
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
@@ -373,11 +381,14 @@ justify-content: center;
 }
 
 .player-grid div.sunk {
-  background-color: black;
+  background-image: url(../assets/explosion.png);
+  background-color: rgba(117,78,2,1);
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
+
+/*? COMPUTER GRID FORMATTING------------------------------------------------- */
 
 .grid-wrapper {
   display: none;
@@ -407,7 +418,7 @@ justify-content: center;
 }
 
 .grid div.ship {
-  background-color: blue;
+  /* background-color: blue; */
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
@@ -440,10 +451,14 @@ justify-content: center;
   cursor: pointer;
 }
 
+
+/*? TAUNT FORMATTING-------------------------------------------------*/
+
+
 #taunts{
   display: none;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-end;
   width: 75%;
   height: 150px;
@@ -451,6 +466,7 @@ justify-content: center;
 }
 
 jack-sparrow-head{
+display:none;
 height: 80%;
 background-image: url(../assets/Jack-headshot.png);
 background-size: contain;
@@ -460,6 +476,7 @@ width: 25%;
 }
 
 barbossa-head{
+  display:none;
   height: 80%;
   background-image: url(../assets/Captain_Barbossa_headshot.png);
   background-size: contain;
@@ -475,17 +492,20 @@ taunt-box{
   height: 100%;
   width: 50%;
 }
+
 taunt-text{
   display: none;
-  background-color: black;
+  background: radial-gradient(circle, rgba(42,39,18,1) 0%, rgba(61,45,3,0.8477766106442577) 85%);
   color:white;
   height: auto;
   text-align: center;
   font-size: 25px;
   margin: 5px;
-  padding: 5px;
+  padding: 25px;
   border-radius: 7px;
 }
+
+/*? PLAYER WON/LOST SCREENS------------------------------------------------- */
 
 #player-lost{
   display:none;
@@ -506,14 +526,13 @@ taunt-text{
 }
 
 h2{
-  font-size: 50px;
-
- color: red; 
- text-shadow: 2px 2px #493232;
+font-size: 50px;
+color: red; 
+text-shadow: 2px 2px #493232;
 margin: 10px;
 }
 
-
+/*? RESET BUTTON STYLING-------------------------------------------------*/
 .reset-button{
   background: radial-gradient(circle, rgba(230,16,16,1) 0%, rgba(140,25,9,1) 85%);
   color: white;
@@ -530,8 +549,6 @@ margin: 10px;
 }
 
 .reset-button:focus{
+  background: radial-gradient(circle, rgb(200, 13, 13) 0%, rgb(100, 18, 17) 85%);
   outline:0;
 }
-
-
-
