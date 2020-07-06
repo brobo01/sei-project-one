@@ -28,7 +28,7 @@ This game has been deployed on GitHub Pages and can be found here: https://brobo
 
 Use the clone button to download the game source code. Open the index.html file in your browser and the game should start, if not check the console for any issues.
 
-### User experience:
+### User experience
 
 A landing page was added to provide the initial theming and instructions on how to play the game, which is hidden on the click of a button to show the start of the gameplay - the player locating their ships on their grid, which was created through DOM manipulation.
 
