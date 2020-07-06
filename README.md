@@ -34,16 +34,16 @@ Use the clone button to download the game source code. Open the index.html file 
 User experience:
 
 A landing page was added to provide the initial theming and instructions on how to play the game, which is hidden on the click of a button to show the start of the gameplay - the player locating their ships on their grid, which was created through DOM manipulation.
-![Screenshot 1](assets/PSOTC - screenshot 1.png)
+![Screenshot 1](assets/PSOTC-screenshot1.png)
 
 To locate their ships, the player can move them around the board using the points of a compass and a rotate button. This required heavy logic to ensure that the ships couldn't move either where there was another ship or off the edge of the board, especially for rotating.
-![Screenshot 2](assets/PSOTC - Screenshot 2.png)
+![Screenshot 2](assets/PSOTC-Screenshot2.png)
 
 The computer's ships are randomly located by first either choosing horizontal or vertical and then the squares to occupy. The location function is then repeated if there is a ship in any of the squares, with the function iterating through the remaining ship objects in the array until all the ships are located. 
 
 
 Once the player has located their ships, the computer's board becomes visible and the player can start by taking a shot. When computer then takes a shot and when it hits a player ship, a hunter function is then used to determine the direction of the ship and then continue hitting it until it is sunk
-![Screenshot 3](assets/PSOTC - Screenshot 3.png)
+![Screenshot 3](assets/PSOTC-Screenshot3.png)
 
 
 
