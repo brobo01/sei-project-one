@@ -52,5 +52,10 @@ The challenges encountered during the build were related to the additional featu
 
 The more visually impressive challenge was allowing the player to move their ships around the board using the compass buttons, as this had to check whether the proposed new location was either beyond the end of the board of contained a part of a ship. 
 
+### Key Learnings and Takeaways
+The key learning from this project was the importance of planning out the build process and breaking it into smaller, manageable pieces of work. This was demonstrated in creating the hunter logic in particular, as 
+`<div>`
+
+
 ### Future Content
 To continue the development of the game, I would include sound effects and animation for taking shots and add in further logic to the computer shooting to focus on areas where players tend to put their ships first before widening the field of fire to the rest of the board.
