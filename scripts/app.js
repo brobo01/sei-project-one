@@ -361,7 +361,6 @@ function init(){
   // * hunterOne sends the four cells around the hit cell to the next shot array, this is then cleared when there is a second hit and hunterRef is increased by one to call hunterTwo which focuses on the direction of the ship
 
   function hunterOne (){
-    
     if (targetShip[0] < width - 1){
       nextShot.push(targetShip[0] - 1)
       nextShot.push(targetShip[0] + width)
@@ -384,7 +383,6 @@ function init(){
       nextShot.push(targetShip[0] + width)
       nextShot.push(targetShip[0] + 1)
     }
-    // nextShot = []
   }
   
   function hunterTwo(){
